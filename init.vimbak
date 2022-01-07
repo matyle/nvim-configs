@@ -1,0 +1,243 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+let g:godef_split=2
+autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
+autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
+autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
+" 打开和关闭NERDTree快捷键
+map <F10> :NERDTreeToggle<CR>
+" 设置宽度
+" let NERDTreeWinSize=25
+nmap <F9> :TagbarToggle<CR>
+let g:tagbar_width=25
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+ 
+Plugin 'fatih/vim-go'
+ 
+Plugin 'majutsushi/tagbar'
+ 
+Plugin 'scrooloose/nerdtree'
+ 
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"配色方案
+
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'tomasr/molokai'
+
+
+"代码折叠插件
+Plugin 'tmhedberg/SimpylFold'
+"自动缩进
+Plugin 'vim-scripts/indentpython.vim'
+"在vim的normal模式下搜索文件
+Plugin 'kien/ctrlp.vim'
+"Powerline状态栏
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" 插件开始的位置
+"==============================================================================
+call plug#begin('~/.vim/plug')
+
+" 主题配色 
+"Plug 'morhetz/gruvbox' 
+Plug 'mhartington/oceanic-next'
+Plug 'arcticicestudio/nord-vim'
+" 状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+Plug 'vim-airline/vim-airline'
+" 状态栏目插件的主题，使用后可以使颜色看起来更加突出一点
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'terryma/vim-multiple-cursors'
+" 用来提供一个导航目录的侧边栏
+"Plug 'preservim/nerdtree'
+" nerdtree 中显示 git 状态
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 可以在导航中显示图标， 不过需要有字体支持，否则就是乱码
+" https://github.com/ryanoasis/nerd-fonts
+" 终端也需要字体配合，如我使用的是 firacode nerd font Regular
+" 喜欢其他字体也可以，不过要使用带 nerd font 的字体
+"Plug 'ryanoasis/vim-devicons'
+
+" 可以在文档中显示 git 信息
+Plug 'airblade/vim-gitgutter'
+
+" markdown 预览
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" markdown 中 latex 数学公式支持
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'ntk148v/vim-horizon'
+" 下面两个插件要配合使用，可以自动生成代码块
+" B
+" Plug 'SirVer/ultisnips'   " 插件本身， 使用 coc-snippets 替换了
+Plug 'honza/vim-snippets' " 代码片段仓库
+
+" 代码自动完成插件
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" 插件结束的位置，插件全部放在此行上面
+call plug#end()
+"==============================================================================
+
+
+
+"设置显示powerline
+set laststatus=2
+"设置分割窗口
+set splitbelow
+set splitright
+"设置窗口移动快捷键
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <Space> i_<Esc>r
+"设置按F2启动NerdTree
+map <F2> :NERDTreeToggle<CR>
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+""let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+"关闭加载.ycm_extra_conf.py提示
+let g:ycm_confirm_extra_conf=0
+" 开启 YCM 基于标签引擎
+let g:ycm_collect_identifiers_from_tags_files=1
+" 从第2个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=2
+" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+"force recomile with syntastic
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+"nnoremap <leader>lo :lopen<CR> "open locationlist
+"nnoremap <leader>lc :lclose<CR>    "close locationlist
+inoremap <leader><leader> <C-x><C-o>
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"let g:ycm_autoclose_preview_window_after_completion=1
+"隐藏目录树种的.pyc文件
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+"设置主题颜色，以及设置快捷键F5
+"set t_Co=256
+""set background=dark
+"set termguicolors
+"
+"colorscheme horizon
+"
+"" lightline
+"let g:lightline = {}
+"let g:lightline.colorscheme = 'horizon'
+"call togglebg#map("<F3>")
+"if &diff
+    "colors blue
+"endif
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+colorscheme OceanicNext
+"开启代码折叠
+set foldmethod=indent
+set foldlevel=99
+"设置快捷键为空格
+nnoremap <space> za
+"显示折叠代码的文档字符串
+let g:SimpylFold_docstring_preview=1
+ 
+"python代码缩进PEP8风格
+au BufNewFile,BufRead *.py,*.pyw set tabstop=4
+au BufNewFile,BufRead *.py,*.pyw set softtabstop=4
+au BufNewFile,BufRead *.py,*.pyw set shiftwidth=4
+au BufNewFile,BufRead *.py,*.pyw set expandtab
+au BufNewFile,BufRead *.py,*.pyw set textwidth=79
+au BufNewFile,BufRead *.py,*.pyw set autoindent
+au BufNewFile,BufRead *.py,*.pyw set fileformat=unix
+"对其他文件类型设置au命令
+au BufNewFile,BufRead *.js, *.html, *.css set tabstop=2
+au BufNewFile,BufRead *.js, *.html, *.css set softtabstop=2
+au BufNewFile,BufRead *.js, *.html, *.css set shiftwidth=2
+"高亮显示行伟不必要的空白字符
+highlight Whitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Whitespace /\s\+$\ \+/
+"设置行号显示
+set nu
+ 
+"设置utf-8编码
+set encoding=utf-8
+let python_highlight_all=1
+syntax on
+filetype plugin indent on
+set backspace=indent,eol,start
+set cursorline
+set history=1000
+set fileencodings=utf-8,gb18030,utf-16,big5
+set hlsearch
+set clipboard=unnamed
+set expandtab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+
+
