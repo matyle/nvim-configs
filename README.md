@@ -1,16 +1,12 @@
-## <center>[Colemak](https://colemak.com/) 用户使用的 [NeoVim](https://neovim.io) 配置文件</center>
+## QWER用户使用
 
-<center><img src="https://raw.githubusercontent.com/theniceboy/nvim/master/demo.png"></center>
-
-[English Version](./README.md)
+[English Version](./README_EN.md)
 
 请不要只复制这份配置文件夹而不认真看它！请至少阅读一下这份自述文件！
 
 ---
+基于 [theniceboy](https://github.com/theniceboy)
 
-第一版翻译: [**EvanMeek**](https://github.com/EvanMeek)
-
-第二版翻译 (当前版本): [**KiteAB**](https://github.com/KiteAB)
 
 <!-- TOC GFM -->
 
@@ -346,7 +342,7 @@ See `:help table-mode.txt` for more.
 按下：`yss`
 ``` 
 "hello, world"
-<++>
+c
 ```
 
 <++>

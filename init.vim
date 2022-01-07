@@ -220,8 +220,6 @@ cnoremap <M-w> <S-Right>
 " ===
 " === Searching
 " ===
-noremap - N
-noremap = n
 
 
 " ===
