@@ -84,6 +84,13 @@
 		"cs",
 		"prisma"
 	],
+	"coc.source.vimtex.enable": true,
+	"coc.source.vimtex.priority":100,
+	"coc.source.vimtex.filetypes": [
+		"tex",
+		"plaintex",
+		"latex"
+	],
 	"yaml.format.enable": true,
 	"signature.target": "float",
 	"yank.enableCompletion": false,

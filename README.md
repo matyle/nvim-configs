@@ -64,6 +64,7 @@
 	- [Git 相关](#git-相关)
 		+ [vim-gitgutter](#vim-gitgutter)
 		+ [fzf-gitignore](#fzf-gitignore)
+		+ [blamer blamer](#blamer-blamer)
 	- [其它](#其它-1)
 		+ [vim-calendar](#vim-calendar)
 		+ [Goyo - 不会分心地工作](#goyo---不会分心地工作)
@@ -73,9 +74,6 @@
 * [自定义代码片段补全](#自定义代码片段补全)
 	- [Markdown](#markdown)
 * [markdown preview](#markdown-preview)
-* [自动保存](#自动保存)
-* [一些奇怪的东西](#一些奇怪的东西)
-	- [按 `tx` 然后输入你想要的文字](#按-tx-然后输入你想要的文字)
 	- [自定义垂直光标移动](#自定义垂直光标移动)
 
 <!-- /TOC -->
@@ -466,6 +464,10 @@ c
 
 <img alt="Png" src="https://raw.githubusercontent.com/airblade/vim-gitgutter/master/screenshot.png" width="60%" />
 
+#### blamer [blamer](https://github.com/APZelos/blamer.nvim) 
+类似于vscode中的gitlen 能够显示谁修改的代码
+`Plug 'APZelos/blamer.nvim'` 
+
 ### 其它
 #### [vim-calendar](https://github.com/itchyny/calendar.vim)
 | 快捷键  | 行为     |
@@ -513,14 +515,16 @@ c
 `,w` 去往下一个 `<++>` (占位符) 并帮你按下 `Enter`
 
 ## markdown preview
-
-## 自动保存
-
-
-
-
-## 一些奇怪的东西
-### 按 `tx` 然后输入你想要的文字
+1. install server: `npm -g install instant-markdown-d` <++>
+2. or install mini server `pip install --user smdv` <++>
+		(need pandoc)
+"## 自动保存
+"
+"
+ 
+"
+"## 一些奇怪的东西
+"### 按 `tx` 然后输入你想要的文字
 `tx Hello<Enter>`
 ```
  _   _      _ _

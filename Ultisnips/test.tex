@@ -1,0 +1,29 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[dutch]{babel}
+\usepackage{amsmath, amssymb}
+
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+\chapter{chapter nae}%
+\label{cha:${1/\\w+{(.*?)}|\(.)|(\w+)|([^\w\]+)/(?4:_:\Lchapter name${1/\\w+{(.*?)}|\(.)|(\w+)|([^\w\]+)/(?4:_:\L\E)/ga\E)/ga}}
+
+
+	
+\enddocument}

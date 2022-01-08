@@ -357,7 +357,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
-		exec "InstantMarkdownPreview"
+		exec "MarkdownPreview"
 	elseif &filetype == 'tex'
 		silent! exec "VimtexStop"
 		silent! exec "VimtexCompile"
@@ -382,6 +382,10 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
+"自动格式化
+Plug 'Chiel92/vim-autoformat'
+"git 
+Plug 'ludovicchabant/vim-gutentags'
 " Plug 'LoricAndre/fzterm.nvim'
 
 Plug 'majutsushi/tagbar'
@@ -400,8 +404,11 @@ Plug 'theniceboy/nvim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Status line
-Plug 'theniceboy/eleline.vim'
+"Plug 'theniceboy/eleline.vim'
 Plug 'ojroques/vim-scrollstatus'
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
 
 " General Highlighter
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -416,6 +423,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'kevinhwang91/rnvimr'
 Plug 'airblade/vim-rooter'
 Plug 'pechorin/any-jump.vim'
+Plug 'APZelos/blamer.nvim'
 
 " Taglist
 Plug 'liuchengxu/vista.vim'
@@ -447,7 +455,7 @@ Plug 'kdheepak/lazygit.nvim'
 
 " Tex
 Plug 'lervag/vimtex'
-
+Plug 'neoclide/coc-vimtex'
 " CSharp
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
@@ -482,7 +490,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
@@ -501,6 +509,15 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-markdown'
+" If you don't have nodejs and yarn
+" use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
+" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" If you have nodejs and yarn
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Other filetypes
 " Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 
@@ -516,6 +533,7 @@ Plug 'godlygeek/tabular' " ga, or :Tabularize <regex> to align
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 " Plug 'Konfekt/FastFold'
+"
 "Plug 'junegunn/vim-peekaboo'
 "Plug 'wellle/context.vim'
 Plug 'svermeulen/vim-subversive'
@@ -558,7 +576,7 @@ Plug 'wincent/terminus'
 
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
-" Plug 'makerj/vim-pdf'
+ Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
 
@@ -571,7 +589,12 @@ Plug 'akinsho/toggleterm.nvim'
 
 "joplin in vim
 "Plug 'tenfyzhong/joplin.vim'
-
+"
+"sonokai
+"𝐀𝐧𝐝𝐫𝐨𝐦𝐞𝐝𝐚
+"
+Plug 'sainnhe/sonokai'
+"
 call plug#end()
 set re=0
 
@@ -582,6 +605,8 @@ set re=0
 set lazyredraw
 "set regexpengine=1
 
+" blamer
+let g:blamer_show_in_visual_modes = 0
 
 " ===
 " === Dress up my vim
@@ -594,9 +619,21 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
+
 "color dracula
 "color one
-color deus
+"color deus
 "color gruvbox
 "let ayucolor="light"
 "color ayu
@@ -608,13 +645,58 @@ hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
 " ===================== Start of Plugin Settings =====================
+" ===
+" === snippets
+" ===
 
 
 " ===
 " === eleline.vim
 " ===
-let g:airline_powerline_fonts = 0
+"let g:airline_powerline_fonts = 0
 
+" ===
+" lualine
+" ===
+
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode', 'g:coc_status'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+		lualine_x = {{"diagnostics", sources = {"nvim_diagnostic"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+	tabline = {
+		lualine_a = {'buffers'},
+  	lualine_b = {'branch'},
+  	lualine_c = {'filename'},
+  	lualine_x = {},
+  	lualine_y = {},
+  	lualine_z = {'tabs'}
+},
+  extensions = {}
+}
+
+END
 
 " ==
 " == GitGutter
@@ -630,10 +712,12 @@ let g:gitgutter_sign_removed = '▏'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_modified_removed = '▒'
 " autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :GitGutterFold<CR>
+nnoremap <LEADER>gf :gitGutterFold<CR>
 nnoremap <LEADER>gh :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+"gitlens
+let g:blamer_enabled = 1
 "im-select
 let g:im_select_default = 'com.apple.keylayout.ABC'
 
@@ -652,6 +736,7 @@ let g:coc_global_extensions = [
 			\ 'coc-import-cost',
 			\ 'coc-java',
 			\ 'coc-go',
+			\ 'coc-vimtex',
 			\ 'coc-jest',
 			\ 'coc-json',
 			\ 'coc-lists',
@@ -744,21 +829,109 @@ let g:snips_author = 'matytan'
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 " ===
 
-" === vim-instant-markdown
+" === vim-markdown-preview
 " ===
-filetype plugin on
+"filetype plugin on
 "Uncomment to override defaults:
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_open_to_the_world = 1
-let g:instant_markdown_allow_unsafe_content = 1
-let g:instant_markdown_allow_external_content = 0
-let g:instant_markdown_mathjax = 1
-let g:instant_markdown_mermaid = 1
-let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
-let g:instant_markdown_autoscroll = 0
-let g:instant_markdown_port = 8877
-let g:instant_markdown_python = 1
+set shell=bash\ -i
+
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+
+" If you don't have nodejs and yarn
+" use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
+" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
+
+
+" If you have nodejs and yarn
 
 " ===
 " === vim-table-mode
@@ -904,6 +1077,17 @@ let g:far#mapping = {
 		\ "replace_undo" : ["l"],
 		\ }
 
+set lazyredraw            " improve scrolling performance when navigating through large results
+set regexpengine=1        " use old regexp engine
+set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
+
+" shortcut for far.vim find
+nnoremap <silent> <Find-Shortcut>  :Farf<cr>
+vnoremap <silent> <Find-Shortcut>  :Farf<cr>
+
+" shortcut for far.vim replace
+nnoremap <silent> <Replace-Shortcut>  :Farr<cr>
+vnoremap <silent> <Replace-Shortcut>  :Farr<cr>
 
 " ===
 " === vim-calc
@@ -971,16 +1155,60 @@ noremap <LEADER>gk :FzfGitignore<CR>
 " augroup END
 
 
-
 " ===
 " === vimtex
 " ===
 "let g:vimtex_view_method = ''
-let g:vimtex_view_general_viewer = 'llpp'
-let g:vimtex_mappings_enabled = 0
-let g:vimtex_text_obj_enabled = 0
-let g:vimtex_motion_enabled = 0
-let maplocalleader=' '
+"let g:vimtex_mappings_enabled = 0
+"let g:vimtex_text_obj_enabled = 0
+"let g:vimtex_motion_enabled = 0
+"let maplocalleader=' '
+
+"call deoplete#custom#var('omni', 'input_patterns', {
+"      \ 'tex': g:vimtex#re#deoplete
+"      \})
+
+
+let g:vimtex_view_method = "skim"
+let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+
+augroup vimtex_mac
+    autocmd!
+    autocmd User VimtexEventCompileSuccess call UpdateSkim()
+augroup END
+
+function! UpdateSkim() abort
+    let l:out = b:vimtex.out()
+    let l:src_file_path = expand('%:p')
+    let l:cmd = [g:vimtex_view_general_viewer, '-r']
+
+    if !empty(system('pgrep Skim'))
+    call extend(l:cmd, ['-g'])
+    endif
+
+    call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
+endfunction
+
+augroup vimtex_mac
+  autocmd!
+  autocmd FileType tex call SetServerName()
+augroup END
+
+function! SetServerName()
+  call system('echo ' . v:servername . ' > /tmp/curvimserver')
+endfunction
+
+
+
+let g:vimtex_toc_config = {
+\ 'name' : 'TOC',
+\ 'layers' : ['content', 'todo', 'include'],
+\ 'split_width' : 25,
+\ 'todo_sorted' : 0,
+\ 'show_help' : 1,
+\ 'show_numbers' : 1,
+\}
 
 
 " ===
@@ -1354,6 +1582,14 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { "c", "rust" },  -- list of language that will be disabled
   },
+	 rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  },
 }
 EOF
 
@@ -1426,3 +1662,4 @@ endif
 
 let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
 let g:python_host_prog = '/usr/bin/python'
+
