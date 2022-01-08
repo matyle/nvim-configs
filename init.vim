@@ -446,7 +446,7 @@ Plug 'cohama/agit.vim'
 Plug 'kdheepak/lazygit.nvim'
 
 " Tex
-" Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
 " CSharp
 Plug 'OmniSharp/omnisharp-vim'
