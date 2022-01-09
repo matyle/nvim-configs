@@ -75,6 +75,11 @@
 	- [Markdown](#markdown)
 * [markdown preview](#markdown-preview)
 	- [自定义垂直光标移动](#自定义垂直光标移动)
+	- [快速注释](#快速注释)
+	- [Latex使用](#latex使用)
+		+ [补全](#补全)
+		+ [预览](#预览)
+		+ [快捷键](#快捷键-1)
 
 <!-- /TOC -->
 
@@ -549,6 +554,38 @@ c
 | `'` `a` `r` `s` `SPACE` | 将光标向下移动123行   |
 | `[` `d` `o` `SPACE`     | 将光标向上移动50行    |
 
-o
 
 **注意: 目前, 使用此移动方式, 你最多只能垂直移动 199 行!**
+
+### 快速注释
+使用 空格+ cn 快速注释某一行
+<!-- test -->
+
+### Latex使用
+安装vimtex，coc-vimtex
+
+#### 补全
+coc-vimtex
+vim-snippets
+coc-snippets
+
+
+#### 预览
+
+#### 快捷键
+快速跳转至下一个或上一个 section 章节：[[、]]、][、[]；
+
+删除包含当前内容的环境标签：dse (Delete surrounding environment)；
+
+更换包含当前内容的环境标签：cse (Change surrounding environment)；
+
+更换有 * 和无 * 的环境标签（比如将 equation* 更换为 equation、将 figure* 更换为 figure 等）tse (Toggle starred environment)：
+
+[https://github.com/lervag/vimtex#features](更多快捷键) 
+
+自定义快捷键：
+
+tc:`:VimtexTocToggle` 
+to:`:VimtexTocOpen` 
+tv:`VimtexView` 
+

@@ -46,6 +46,15 @@ source $XDG_CONFIG_HOME/nvim/_machine_specific.vim
 let &t_ut=''
 set autochdir
 
+""""""""""""""""""""""
+"  ack use ag  "
+""""""""""""""""""""""
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 " ===
 " === Editor behavior
@@ -126,10 +135,9 @@ noremap S :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
+"
 noremap <LEADER>rv :e .nvimrc<CR>
 
-" Undo operations
-"noremap u
 
 " Insert Key
 
@@ -382,6 +390,8 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
+" ag ack
+Plug 'mileszs/ack.vim'
 "自动格式化
 Plug 'Chiel92/vim-autoformat'
 "git 
@@ -457,8 +467,8 @@ Plug 'kdheepak/lazygit.nvim'
 Plug 'lervag/vimtex'
 Plug 'neoclide/coc-vimtex'
 " CSharp
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
+"Plug 'OmniSharp/omnisharp-vim'
+"Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
 
 " HTML, CSS, JavaScript, Typescript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
@@ -500,11 +510,11 @@ Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 Plug 'dart-lang/dart-vim-plugin'
 
 " Swift
-Plug 'keith/swift.vim'
-Plug 'arzg/vim-swift'
+"Plug 'keith/swift.vim'
+"Plug 'arzg/vim-swift'
 
 " Markdown
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim'
@@ -532,6 +542,7 @@ Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'godlygeek/tabular' " ga, or :Tabularize <regex> to align
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
+Plug 'arcticicestudio/nord-vim'
 " Plug 'Konfekt/FastFold'
 "
 "Plug 'junegunn/vim-peekaboo'
@@ -576,7 +587,7 @@ Plug 'wincent/terminus'
 
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
- Plug 'makerj/vim-pdf'
+"Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
 
@@ -740,7 +751,6 @@ let g:coc_global_extensions = [
 			\ 'coc-jest',
 			\ 'coc-json',
 			\ 'coc-lists',
-			\ 'coc-omnisharp',
 			\ 'coc-prettier',
 			\ 'coc-prisma',
 			\ 'coc-pyright',
@@ -1169,35 +1179,64 @@ noremap <LEADER>gk :FzfGitignore<CR>
 "      \})
 
 let g:tex_flavor = 'latex'
-let g:vimtex_view_method = "skim"
-let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+"filetype plugin indent on
 
-augroup vimtex_mac
-    autocmd!
-    autocmd User VimtexEventCompileSuccess call UpdateSkim()
-augroup END
+" This enables Vim's and neovim's syntax-related features. Without this, some
+" VimTeX features will not work (see ":help vimtex-requirements" for more
+" info).
+"syntax enable
 
-function! UpdateSkim() abort
-    let l:out = b:vimtex.out()
-    let l:src_file_path = expand('%:p')
-    let l:cmd = [g:vimtex_view_general_viewer, '-r']
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+let g:vimtex_view_method = 'zathura'
 
-    if !empty(system('pgrep Skim'))
-    call extend(l:cmd, ['-g'])
-    endif
+" Or with a generic interface:
+let g:vimtex_view_general_viewer = 'zathura'
+"let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
-    call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
-endfunction
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+"let g:vimtex_compiler_method = 'latexrun'
 
-augroup vimtex_mac
-  autocmd!
-  autocmd FileType tex call SetServerName()
-augroup END
+"let g:vimtex_compiler_progname = 'nvr'
 
-function! SetServerName()
-  call system('echo ' . v:servername . ' > /tmp/curvimserver')
-endfunction
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+"let maplocalleader = ","
+" let g:vimtex_view_method = "skim"
+" let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+" let g:vimtex_view_general_options = '-r @line @pdf @tex'
+"
+" augroup vimtex_mac
+"     autocmd!
+"     autocmd User VimtexEventCompileSuccess call UpdateSkim()
+" augroup END
+"
+" function! UpdateSkim() abort
+"     let l:out = b:vimtex.out()
+"     let l:src_file_path = expand('%:p')
+"     let l:cmd = [g:vimtex_view_general_viewer, '-r']
+"
+"     if !empty(system('pgrep Skim'))
+"     call extend(l:cmd, ['-g'])
+"     endif
+"
+"     call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
+" endfunction
+"
+" augroup vimtex_mac
+"   autocmd!
+"   autocmd FileType tex call SetServerName()
+" augroup END
+"
+" function! SetServerName()
+"   call system('echo ' . v:servername . ' > /tmp/curvimserver')
+" endfunction
 
 
 
@@ -1209,6 +1248,11 @@ let g:vimtex_toc_config = {
 \ 'show_help' : 1,
 \ 'show_numbers' : 1,
 \}
+
+" map
+autocmd FileType tex noremap tc :VimtexTocToggle<CR>
+autocmd FileType tex noremap to :VimtexTocOpen<CR>
+autocmd FileType tex noremap tv :VimtexView<CR>
 
 
 " ===
@@ -1279,23 +1323,23 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " ===
 " === OmniSharp
 " ===
-let g:OmniSharp_typeLookupInPreview = 1
-let g:omnicomplete_fetch_full_documentation = 1
-
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_selector_ui = 'ctrlp'
-
-autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
-autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
-autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
-autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
-autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
-
-sign define OmniSharpCodeActions text=💡
-
-let g:coc_sources_disable_map = { 'cs': ['cs', 'cs-1', 'cs-2', 'cs-3'] }
+" let g:OmniSharp_typeLookupInPreview = 1
+" let g:omnicomplete_fetch_full_documentation = 1
+"
+" let g:OmniSharp_server_use_mono = 1
+" let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_highlight_types = 2
+" let g:OmniSharp_selector_ui = 'ctrlp'
+"
+" autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
+" autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
+" autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
+" autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
+" autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
+"
+" sign define OmniSharpCodeActions text=💡
+"
+" let g:coc_sources_disable_map = { 'cs': ['cs', 'cs-1', 'cs-2', 'cs-3'] }
 
 " ===
 " === vim-easymotion
