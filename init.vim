@@ -1179,7 +1179,6 @@ noremap <LEADER>gk :FzfGitignore<CR>
 "      \})
 
 let g:tex_flavor = 'latex'
-<<<<<<< Updated upstream
 " This is necessary for VimTeX to load properly. The "indent" is optional.
 " Note that most plugin managers will do this automatically.
 "filetype plugin indent on
@@ -1213,14 +1212,12 @@ let g:vimtex_view_general_viewer = 'zathura'
 " let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 " let g:vimtex_view_general_options = '-r @line @pdf @tex'
 "
-=======
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = 'zathura'
 " let g:vimtex_view_method = "skim"
 " let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 " let g:vimtex_view_general_options = '-r @line @pdf @tex'
 
->>>>>>> Stashed changes
 " augroup vimtex_mac
 "     autocmd!
 "     autocmd User VimtexEventCompileSuccess call UpdateSkim()
