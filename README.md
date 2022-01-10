@@ -80,6 +80,8 @@
 		+ [补全](#补全)
 		+ [预览](#预览)
 		+ [快捷键](#快捷键-1)
+		+ [nvim内置lsp尝试](#nvim内置lsp尝试)
+		+ [nvim 图片](#nvim-图片)
 
 <!-- /TOC -->
 
@@ -348,7 +350,7 @@ See `:help table-mode.txt` for more.
 c
 ```
 
-<++>
+
 
 想要修改包裹符号
 ```
@@ -514,6 +516,7 @@ c
 | `,3`   | ### H3           |
 | `,4`   | #### H4          |
 | `,l`   | --------         |
+| `,g`   | img              |
 
 `,f` 去往下一个 `<++>` (占位符)
 
@@ -589,3 +592,8 @@ tc:`:VimtexTocToggle`
 to:`:VimtexTocOpen` 
 tv:`VimtexView` 
 
+#### nvim内置lsp尝试
+
+
+#### nvim 图片
+首先：upic上传图片

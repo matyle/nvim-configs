@@ -136,7 +136,6 @@ noremap S :w<CR>
 " Open the vimrc file anytime
 noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
 "
-noremap <LEADER>rv :e .nvimrc<CR>
 
 
 " Insert Key
@@ -631,17 +630,18 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:one_allow_italics = 1
 
 " Important!!
-if has('termguicolors')
-  set termguicolors
-endif
-
+ if has('termguicolors')
+   set termguicolors
+ endif
+"
 " The configuration options should be placed before `colorscheme sonokai`.
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
-colorscheme sonokai
+"colorscheme sonokai
 
+colorscheme nord
 "color dracula
 "color one
 "color deus
@@ -674,7 +674,7 @@ lua << END
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
+    theme = 'sonokai',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
