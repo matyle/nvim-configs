@@ -390,10 +390,13 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
+"安装插件
+Plug 'ferrine/md-img-paste.vim' 
 " ag ack
 Plug 'mileszs/ack.vim'
 "自动格式化
 Plug 'Chiel92/vim-autoformat'
+
 "git 
 Plug 'ludovicchabant/vim-gutentags'
 " Plug 'LoricAndre/fzterm.nvim'
@@ -775,9 +778,19 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
-
 END
-" ==
+""""""""""""""""""""""
+" p  imgpast  "
+""""""""""""""""""""""
+
+"==p 设置默认储存文件夹。这里表示储存在当前文档所在文件夹下的'pic'文件夹下，相当于 ./pic/
+let g:mdip_imgdir = 'pic' 
+"设置默认图片名称。当图片名称没有给出时，使用默认图片名称
+let g:mdip_imgname = 'image'
+"设置快捷键，个人喜欢 空格 p 的方式，比较直观
+autocmd FileType markdown nnoremap <silent> <LEADER>p:call mdip#MarkdownClipboardImage()<CR>F%i
+
+"p p pp  p p  ==
 " == GitGutter
 " ==
 " let g:gitgutter_signs = 0
@@ -1654,7 +1667,7 @@ let g:dartfmt_options = ["-l 100"]
 
 " ===
 " === tcomment_vim
-" ===
+" " =
 nnoremap ci cl
 let g:tcomment_textobject_inlinecomment = ''
 nmap <LEADER>cn g>c
