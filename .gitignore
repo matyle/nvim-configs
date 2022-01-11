@@ -5,3 +5,12 @@ tags
 node_modules
 tag*
 test*
+
+Ultisnips/test.aux
+Ultisnips/test.fdb_latexmk
+Ultisnips/test.fls
+Ultisnips/test.log
+Ultisnips/test.pdf
+Ultisnips/test.synctex.gz
+
+Ultisnips/test.tex

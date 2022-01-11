@@ -453,7 +453,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'Pocco81/AutoSave.nvim'
 " Snippets
 " Plug 'SirVer/ultisnips'
-Plug 'theniceboy/vim-snippets'
+Plug 'honza/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -827,19 +827,17 @@ let g:coc_global_extensions = [
 			\ 'coc-html',
 			\ 'coc-import-cost',
 			\ 'coc-java',
-			\ 'coc-vimtex',
 			\ 'coc-jest',
+			\ 'coc-snippets',
 			\ 'coc-json',
 			\ 'coc-lists',
 			\ 'coc-prettier',
 			\ 'coc-prisma',
 			\ 'coc-pyright',
-			\ 'coc-snippets',
 			\ 'coc-sourcekit',
 			\ 'coc-stylelint',
 			\ 'coc-syntax',
 			\ 'coc-tailwindcss',
-			\ 'coc-tasks',
 			\ 'coc-translator',
 			\ 'coc-tsserver',
 			\ 'coc-vetur',
@@ -908,7 +906,7 @@ nmap <leader>aw  <Plug>(coc-codeaction-selected)w
 " nnoremap <leader>tl :CocList todolist<CR>
 " nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
 " coc-tasks
-noremap <silent> <leader>ts :CocList tasks<CR>
+" noremap <silent> <leader>ts :CocList tasks<CR>
 " coc-snippets
 imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
@@ -1231,12 +1229,11 @@ noremap <LEADER>gk :FzfGitignore<CR>
 " ===
 " === Ultisnips
 " ===
-" let g:tex_flavor = "latex"
 " inoremap <c-n> <nop>
-" let g:UltiSnipsExpandTrigger="<c-e>"
-" let g:UltiSnipsJumpForwardTrigger="<c-e>"
+" let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/']
+" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/snippets/']
 " silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 " " Solve extreme insert-mode lag on macOS (by disabling autotrigger)
 " augroup ultisnips_no_auto_expansion
@@ -1248,11 +1245,6 @@ noremap <LEADER>gk :FzfGitignore<CR>
 " ===
 " === vimtex
 " ===
-"let g:vimtex_view_method = ''
-"let g:vimtex_mappings_enabled = 0
-"let g:vimtex_text_obj_enabled = 0
-"let g:vimtex_motion_enabled = 0
-"let maplocalleader=' '
 
 "call deoplete#custom#var('omni', 'input_patterns', {
 "      \ 'tex': g:vimtex#re#deoplete

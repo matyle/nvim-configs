@@ -68,8 +68,11 @@
 	"importCost.debug": false,
 	"snippets.ultisnips.directories": [
 		"$HOME/.config/nvim/Ultisnips/",
-		"$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/"
+		"$HOME/.config/nvim/snippets/"
 	],
+	// "snippets.extends": {
+	// 	"latex":["tex","texmath"]
+	// },
 	"coc.preferences.formatOnSaveFiletypes": [
 		"javascript",
 		"typescript",
