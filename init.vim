@@ -413,7 +413,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
 
 " Pretty Dress
-Plug 'theniceboy/nvim-deus'
+" Plug 'theniceboy/nvim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Status line
@@ -827,7 +827,6 @@ let g:coc_global_extensions = [
 			\ 'coc-html',
 			\ 'coc-import-cost',
 			\ 'coc-java',
-			\ 'coc-go',
 			\ 'coc-vimtex',
 			\ 'coc-jest',
 			\ 'coc-json',
@@ -1403,9 +1402,9 @@ let g:go_fmt_command = "goimports"
 "let g:go_def_mode='gopls'
 "let g:go_info_mode='gopls'
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
-autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
-autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
+" autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+" autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
+" autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
 " ===
 " === OmniSharp
@@ -1582,20 +1581,48 @@ let g:vmt_fence_closing_text = '/TOC'
 " ===
 " === rnvimr
 " ===
-let g:rnvimr_ex_enable = 1
-let g:rnvimr_pick_enable = 1
-let g:rnvimr_draw_border = 0
-" let g:rnvimr_bw_enable = 1
-highlight link RnvimrNormal CursorLine
 nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-            \ }
-"let g:rnvimr_layout = { 'relative': 'editor',
-"            \ 'width': &columns,
-"            \ 'height': &lines,
-"            \ 'col': 0,
-"            \ 'row': 0,
-"            \ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" Replace `$EDITOR` candidate with this command to open the selected file
+let g:rnvimr_edit_cmd = 'drop'
+
+" Disable a border for floating window
+let g:rnvimr_draw_border = 0
+
+" Hide the files included in gitignore
+let g:rnvimr_hide_gitignore = 1
+
+" Change the border's color
+let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
+
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+
+" Add a shadow window, value is equal to 100 will disable shadow
+let g:rnvimr_shadow_winblend = 70
+
+" Draw border with both
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+
+" Link CursorLine into RnvimrNormal highlight in the Floating window
+highlight link RnvimrNormal CursorLine
+
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+
+" Resize floating window by all preset layouts
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+
+" Resize floating window by special preset layouts
+tnoremap <silent> <M-l> <C-\><C-n>:RnvimrResize 1,8,9,11,5<CR>
+
+" Resize floating window by single preset layout
+tnoremap <silent> <M-y> <C-\><C-n>:RnvimrResize 6<CR>
 
 " Map Rnvimr action
 let g:rnvimr_action = {
@@ -1623,6 +1650,37 @@ let g:rnvimr_layout = {
             \ 'style': 'minimal'
             \ }
 
+" Customize multiple preset layouts
+" '{}' represents the initial layout
+let g:rnvimr_presets = [
+            \ {'width': 0.600, 'height': 0.600},
+            \ {},
+            \ {'width': 0.800, 'height': 0.800},
+            \ {'width': 0.950, 'height': 0.950},
+            \ {'width': 0.500, 'height': 0.500, 'col': 0, 'row': 0},
+            \ {'width': 0.500, 'height': 0.500, 'col': 0, 'row': 0.5},
+            \ {'width': 0.500, 'height': 0.500, 'col': 0.5, 'row': 0},
+            \ {'width': 0.500, 'height': 0.500, 'col': 0.5, 'row': 0.5},
+            \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
+            \ {'width': 0.500, 'height': 1.000, 'col': 0.5, 'row': 0},
+            \ {'width': 1.000, 'height': 0.500, 'col': 0, 'row': 0},
+            \ {'width': 1.000, 'height': 0.500, 'col': 0, 'row': 0.5}
+            \ ]
+
+" Fullscreen for initial layout
+" let g:rnvimr_layout = {
+"            \ 'relative': 'editor',
+"            \ 'width': &columns,
+"            \ 'height': &lines - 2,
+"            \ 'col': 0,
+"            \ 'row': 0,
+"            \ 'style': 'minimal'
+"            \ }
+"
+" Only use initial preset layout
+" let g:rnvimr_presets = [{}]
+
+
 
 " ===
 " === vim-subversive
@@ -1649,6 +1707,7 @@ let g:rooter_silent_chdir = 1
 " === AsyncRun
 " ===
 noremap gp :AsyncRun git push<CR>
+
 
 
 " ===
@@ -1708,7 +1767,7 @@ let g:agit_no_default_mappings = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"typescript", "dart", "java"},     -- one of "all", "language", or a list of languages
+  ensure_installed = {"typescript", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { "c", "rust" },  -- list of language that will be disabled
