@@ -243,14 +243,14 @@
 		"elixir": "mix_format",
 		"eelixir": "mix_format"
 	},
-	"go.goplsOptions": {
-		"completeUnimported": true
-	}, 
-	"go.goplsPath": "/Users/matytan/go/bin/gopls",
-	"go.goplsEnv": {
-		    "GOOS": "js",
-		    "GOARCH": "wasm"
-	},
+	// "go.goplsOptions": {
+	// 	"completeUnimported": true
+	// }, 
+	// "go.goplsPath": "/Users/matytan/go/bin/gopls",
+	// "go.goplsEnv": {
+	// 	    "GOOS": "js",
+	// 	    "GOARCH": "wasm"
+	// },
 	"languageserver": {
 		"lua": {
 			"command": "lua-lsp",
@@ -269,10 +269,10 @@
       "filetypes": ["go"],
 			"disableWorkspaceFolders": true,
       "initializationOptions": {
-        "usePlaceholders": true,
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golint"
+        // "usePlaceholders": true
+				// "gocodeCompletionEnabled": true,
+				// "diagnosticsEnabled": true,
+				// "lintTool": "golint"
       }
     },
 		"bash": {

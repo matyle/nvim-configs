@@ -11,3 +11,5 @@ let g:flutter_run_args = "--flavor dev"
 
 
 let g:barbaric_ime = 'fcitx'
+
+" test

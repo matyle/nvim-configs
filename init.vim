@@ -46,15 +46,6 @@ source $XDG_CONFIG_HOME/nvim/_machine_specific.vim
 let &t_ut=''
 set autochdir
 
-""""""""""""""""""""""
-"  ack use ag  "
-""""""""""""""""""""""
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
 
 " ===
 " === Editor behavior
@@ -119,7 +110,7 @@ let g:neoterm_autoscroll = 1
 " autocmd TermOpen term://* startinsert
 " tnoremap <C-K> <C-\><C-K>
 " tnoremap <C-O> <C-\><C-K><C-O>
-
+noremap <c-\> :ToggleTerm size=20 direction=float<CR>
 
 
 " ===
@@ -291,7 +282,7 @@ noremap tml :+tabmove<CR>
 source $XDG_CONFIG_HOME/nvim/md-snippets.vim
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
-
+" TODO:  <12-01-22, matytan> "
 
 " ===
 " === Other useful stuff
@@ -323,7 +314,7 @@ noremap tx :r !figlet
 noremap \s :%s//g<left><left>
 
 " set wrap
-noremap <leader>sw :set wrap<cr>
+noremap <LEADER>sw :set wrap<cr>
 
 " press f10 to show hlgroup
 function! SynGroup()
@@ -333,7 +324,7 @@ endfun
 map <F10> :call SynGroup()<CR>
 
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap <LEADER>ru :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
@@ -413,7 +404,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
 
 " Pretty Dress
-" Plug 'theniceboy/nvim-deus'
+Plug 'theniceboy/nvim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Status line
@@ -450,7 +441,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
 "auto save
-Plug 'Pocco81/AutoSave.nvim'
+" Plug 'Pocco81/AutoSave.nvim'
 " Snippets
 " Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -503,10 +494,10 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-"Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 
 " Flutter
@@ -527,7 +518,7 @@ Plug 'tpope/vim-markdown'
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " If you have nodejs and yarn
 "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -640,6 +631,15 @@ set lazyredraw
 let g:blamer_show_in_visual_modes = 0
 
 
+""""""""""""""""""""""
+"  ack use ag  "
+""""""""""""""""""""""
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 
 " ===
@@ -730,55 +730,10 @@ require('lualine').setup {
 },
   extensions = {}
 }
-
---""""""""""""""""""""""
---"  toggleterm  "
--- """"""""""""""""""""""
-require("toggleterm").setup {
-  -- size can be a number or function which is passed the current terminal
-  size = 15,
-  open_mapping = [[<c-\>]],
-  hide_numbers = true, -- hide the number column in toggleterm buffers
-  shade_filetypes = {},
-  shade_terminals = true,
-  shading_factor = "<number>", -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-  start_in_insert = true,
-  insert_mappings = true, -- whether or not the open mapping applies in insert mode
-  persist_size = true,
-  direction = "float",
-  close_on_exit = true, -- close the terminal window when the process exits
-  shell = "/bin/bash", -- change the default shell
-  -- This field is only relevant if direction is set to 'float'
-  float_opts = {
-    -- The border key is *almost* the same as 'nvim_win_open'
-    -- see :h nvim_win_open for details on borders however
-    -- the 'curved' border is a custom border type
-    -- not natively supported but implemented in this plugin.
-    border = "curved",
-		width = 80,
-    height = 30,
-    winblend = 3,
-    highlights = {
-      border = "Normal",
-      background = "Normal"
-    }
-  }
-}
-
-function _G.set_terminal_keymaps()
-  local opts = {noremap = true}
-  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
 END
+
+
+
 """"""""""""""""""""""
 " p  imgpast  "
 """"""""""""""""""""""
@@ -814,6 +769,11 @@ let g:blamer_enabled = 1
 let g:im_select_default = 'com.apple.keylayout.ABC'
 
 " ===
+" === New Section
+" ===
+
+
+" ===
 " === coc.nvim
 " ===
 let g:coc_global_extensions = [
@@ -842,6 +802,7 @@ let g:coc_global_extensions = [
 			\ 'coc-tsserver',
 			\ 'coc-vetur',
 			\ 'coc-vimlsp',
+			\ 'coc-markdownlint',
 			\ 'coc-yaml',
 			\ 'coc-yank',
 			\ 'https://github.com/rodrigore/coc-tailwind-intellisense']
@@ -891,7 +852,7 @@ nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gl <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
+nmap <LEADER>rn <Plug>(coc-rename)
 nmap tt :CocCommand explorer<CR>
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
@@ -899,8 +860,8 @@ nmap ts <Plug>(coc-translator-p)
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>aw  <Plug>(coc-codeaction-selected)w
+xmap <LEADER>a  <Plug>(coc-codeaction-selected)
+nmap <LEADER>aw  <Plug>(coc-codeaction-selected)w
 " coctodolist
 " nnoremap <leader>tn :CocCommand todolist.create<CR>
 " nnoremap <leader>tl :CocList todolist<CR>
@@ -1573,107 +1534,30 @@ let g:vmt_fence_closing_text = '/TOC'
 " ===
 " === rnvimr
 " ===
-nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-
-" Make Ranger replace Netrw and be the file explorer
-let g:rnvimr_enable_ex = 1
-
-" Make Ranger to be hidden after picking a file
-let g:rnvimr_enable_picker = 1
-
-" Replace `$EDITOR` candidate with this command to open the selected file
-let g:rnvimr_edit_cmd = 'drop'
-
-" Disable a border for floating window
-let g:rnvimr_draw_border = 0
-
-" Hide the files included in gitignore
-let g:rnvimr_hide_gitignore = 1
-
-" Change the border's color
-let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
-
-" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
-let g:rnvimr_enable_bw = 1
-
-" Add a shadow window, value is equal to 100 will disable shadow
-let g:rnvimr_shadow_winblend = 70
-
-" Draw border with both
-let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
-
-" Link CursorLine into RnvimrNormal highlight in the Floating window
-highlight link RnvimrNormal CursorLine
-
-tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
-
-" Resize floating window by all preset layouts
-tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-
-" Resize floating window by special preset layouts
-tnoremap <silent> <M-l> <C-\><C-n>:RnvimrResize 1,8,9,11,5<CR>
-
-" Resize floating window by single preset layout
-tnoremap <silent> <M-y> <C-\><C-n>:RnvimrResize 6<CR>
-
-" Map Rnvimr action
-let g:rnvimr_action = {
-            \ '<C-t>': 'NvimEdit tabedit',
-            \ '<C-x>': 'NvimEdit split',
-            \ '<C-v>': 'NvimEdit vsplit',
-            \ 'gw': 'JumpNvimCwd',
-            \ 'yw': 'EmitRangerCwd'
-            \ }
-
-" Add views for Ranger to adapt the size of floating window
-let g:rnvimr_ranger_views = [
-            \ {'minwidth': 90, 'ratio': []},
-            \ {'minwidth': 50, 'maxwidth': 89, 'ratio': [1,1]},
-            \ {'maxwidth': 49, 'ratio': [1]}
-            \ ]
-
-" Customize the initial layout
-let g:rnvimr_layout = {
-            \ 'relative': 'editor',
-            \ 'width': float2nr(round(0.7 * &columns)),
-            \ 'height': float2nr(round(0.7 * &lines)),
-            \ 'col': float2nr(round(0.15 * &columns)),
-            \ 'row': float2nr(round(0.15 * &lines)),
-            \ 'style': 'minimal'
-            \ }
-
-" Customize multiple preset layouts
-" '{}' represents the initial layout
-let g:rnvimr_presets = [
-            \ {'width': 0.600, 'height': 0.600},
-            \ {},
-            \ {'width': 0.800, 'height': 0.800},
-            \ {'width': 0.950, 'height': 0.950},
-            \ {'width': 0.500, 'height': 0.500, 'col': 0, 'row': 0},
-            \ {'width': 0.500, 'height': 0.500, 'col': 0, 'row': 0.5},
-            \ {'width': 0.500, 'height': 0.500, 'col': 0.5, 'row': 0},
-            \ {'width': 0.500, 'height': 0.500, 'col': 0.5, 'row': 0.5},
-            \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
-            \ {'width': 0.500, 'height': 1.000, 'col': 0.5, 'row': 0},
-            \ {'width': 1.000, 'height': 0.500, 'col': 0, 'row': 0},
-            \ {'width': 1.000, 'height': 0.500, 'col': 0, 'row': 0.5}
-            \ ]
-
-" Fullscreen for initial layout
-" let g:rnvimr_layout = {
-"            \ 'relative': 'editor',
-"            \ 'width': &columns,
-"            \ 'height': &lines - 2,
-"            \ 'col': 0,
-"            \ 'row': 0,
-"            \ 'style': 'minimal'
-"            \ }
+" let g:rnvimr_ex_enable = 1
+" let g:rnvimr_pick_enable = 1
+" let g:rnvimr_draw_border = 0
+" " let g:rnvimr_bw_enable = 1
+" highlight link RnvimrNormal CursorLine
+" nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+" let g:rnvimr_action = {
+"             \ '<C-t>': 'NvimEdit tabedit',
+"             \ '<C-x>': 'NvimEdit split',
+"             \ '<C-v>': 'NvimEdit vsplit',
+"             \ 'gw': 'JumpNvimCwd',
+"             \ 'yw': 'EmitRangerCwd'
+"             \ }
+" let g:rnvimr_layout = { 'relative': 'editor',
+"             \ 'width': &columns,
+"             \ 'height': &lines,
+"             \ 'col': 0,
+"             \ 'row': 0,
+"             \ 'style': 'minimal' }
+"vlet g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 "
-" Only use initial preset layout
-" let g:rnvimr_presets = [{}]
-
-
-
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+nnoremap <silent> <LEADER>rm :RnvimrToggle<CR>
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
 " ===
 " === vim-subversive
 " ===
@@ -1785,28 +1669,28 @@ let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
 
-" AutoSave
-lua << EOF
-local autosave = require("autosave")
-
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filename_is_not = {},
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 0,
-        debounce_delay = 135
-    }
-)
-EOF
+" " AutoSave
+" lua << EOF
+" local autosave = require("autosave")
+"
+" autosave.setup(
+"     {
+"         enabled = true,
+"         execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+"         events = {"InsertLeave", "TextChanged"},
+"         conditions = {
+"             exists = true,
+"             filename_is_not = {},
+"             filetype_is_not = {},
+"             modifiable = true
+"         },
+"         write_all_buffers = false,
+"         on_off_commands = true,
+"         clean_command_line_interval = 0,
+"         debounce_delay = 135
+"     }
+" )
+" EOF
 
 " ===================== End of Plugin Settings =====================
 

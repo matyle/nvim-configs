@@ -1,5 +1,5 @@
 {
-  "dependencies": {
-    "neovim": "^4.10.1"
-  }
+	"dependencies": {
+		"neovim": "^4.10.1"
+	}
 }
