@@ -308,7 +308,7 @@ noremap <C-c> zz
 autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
-noremap tx :r !figlet 
+noremap tx :r !figlet
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -381,14 +381,17 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
+Plug 'vim-pandoc/vim-pandoc'
+
+Plug '907th/vim-auto-save'
 "安装插件
-Plug 'ferrine/md-img-paste.vim' 
+Plug 'ferrine/md-img-paste.vim'
 " ag ack
 Plug 'mileszs/ack.vim'
 "自动格式化
 Plug 'Chiel92/vim-autoformat'
 
-"git 
+"git
 Plug 'ludovicchabant/vim-gutentags'
 " Plug 'LoricAndre/fzterm.nvim'
 
@@ -396,7 +399,7 @@ Plug 'majutsushi/tagbar'
 
 " im-select
 if !has('gui_running')
-    Plug 'brglng/vim-im-select'
+	Plug 'brglng/vim-im-select'
 endif
 
 " Treesitter
@@ -445,6 +448,9 @@ Plug 'wellle/tmux-complete.vim'
 " Snippets
 " Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" auto format
+" Plug 'skywind3000/vim-rt-format'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -532,7 +538,7 @@ Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 Plug 'theniceboy/antovim' " gs to switch
 Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
-Plug 'junegunn/vim-after-object' " da= to delete what's after = 
+Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'godlygeek/tabular' " ga, or :Tabularize <regex> to align
 Plug 'easymotion/vim-easymotion'
 Plug 'arcticicestudio/nord-vim'
@@ -599,30 +605,50 @@ Plug 'wincent/terminus'
 Plug 'akinsho/toggleterm.nvim'
 
 "joplin in vim
-"Plug 'tenfyzhong/joplin.vim'
+" Plug 'tenfyzhong/joplin.vim'
 "
 "sonokai
 "𝐀𝐧𝐝𝐫𝐨𝐦𝐞𝐝𝐚
 "
 Plug 'sainnhe/sonokai'
+call plug#end()
 "
 """"""""""""""""""""""
 "  END Install  "
 """"""""""""""""""""""
-
-call plug#end()
 set re=0
 
+" ===
+" === auto save
+" ===
+" test
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_events =["FocusLost"]
+"test
+" This will run :TagsGenerate after each save
+"let g:auto_save_postsave_hook = 'Autoformat'
+"test
+
+"=== autoformat
+"===
+" vim-pandoc
+"
+" let g:autoformat_autoindent = 0
+" let g:autoformat_retab = 0
+" let g:autoformat_remove_trailing_spaces = 0
+noremap <leader>tf :Autoformat<CR>
+" au BufWrite * :Autoformat
+"
 """"""""""""""""""""""
 "  neovim LSP  "
 """"""""""""""""""""""
-" nnoremap <silent> <leader>to <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR> 
+" nnoremap <silent> <leader>to <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>
 " tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
 
 
 " joplin set
-"let g:joplin_token = "8e878d8afd07c581e12091742bbc9f82b50059c27b44bf72c95a7a35d37e9c272efc7001e9f4d99795a657cf53b6c4f2e6e68809b4084423bbe8af23ab609f10"
-"let g:joplin_port = 41184
+" let g:joplin_token = "8e878d8afd07c581e12091742bbc9f82b50059c27b44bf72c95a7a35d37e9c272efc7001e9f4d99795a657cf53b6c4f2e6e68809b4084423bbe8af23ab609f10"
+" let g:joplin_port = 41184
 " experimental
 set lazyredraw
 "set regexpengine=1
@@ -635,7 +661,7 @@ let g:blamer_show_in_visual_modes = 0
 "  ack use ag  "
 """"""""""""""""""""""
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+	let g:ackprg = 'ag --vimgrep'
 endif
 
 cnoreabbrev Ack Ack!
@@ -654,9 +680,9 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:one_allow_italics = 1
 
 " Important!!
- if has('termguicolors')
-   set termguicolors
- endif
+if has('termguicolors')
+	set termguicolors
+endif
 "
 " The configuration options should be placed before `colorscheme sonokai`.
 let g:sonokai_style = 'andromeda'
@@ -696,40 +722,40 @@ hi NonText ctermfg=gray guifg=grey10
 
 lua << END
 require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'sonokai',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = {'mode', 'g:coc_status'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+	options = {
+		icons_enabled = true,
+		theme = 'sonokai',
+		component_separators = { left = '', right = ''},
+		section_separators = { left = '', right = ''},
+		disabled_filetypes = {},
+		always_divide_middle = true,
+		},
+	sections = {
+		lualine_a = {'mode', 'g:coc_status'},
+		lualine_b = {'branch', 'diff', 'diagnostics'},
+		lualine_c = {'filename'},
 		lualine_x = {{"diagnostics", sources = {"nvim_diagnostic"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
+		lualine_y = {'progress'},
+		lualine_z = {'location'}
+		},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {'filename'},
+		lualine_x = {'location'},
+		lualine_y = {},
+		lualine_z = {}
+		},
 	tabline = {
 		lualine_a = {'buffers'},
-  	lualine_b = {'branch'},
-  	lualine_c = {'filename'},
-  	lualine_x = {},
-  	lualine_y = {},
-  	lualine_z = {'tabs'}
-},
-  extensions = {}
-}
+		lualine_b = {'branch'},
+		lualine_c = {'filename'},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {'tabs'}
+		},
+	extensions = {}
+	}
 END
 
 
@@ -739,7 +765,7 @@ END
 """"""""""""""""""""""
 
 "==p 设置默认储存文件夹。这里表示储存在当前文档所在文件夹下的'pic'文件夹下，相当于 ./pic/
-let g:mdip_imgdir = 'pic' 
+let g:mdip_imgdir = 'pic'
 "设置默认图片名称。当图片名称没有给出时，使用默认图片名称
 let g:mdip_imgname = 'image'
 "设置快捷键，个人喜欢 空格 p 的方式，比较直观
@@ -807,9 +833,9 @@ let g:coc_global_extensions = [
 			\ 'coc-yank',
 			\ 'https://github.com/rodrigore/coc-tailwind-intellisense']
 inoremap <silent><expr> <TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 function! s:check_back_space() abort
@@ -858,7 +884,7 @@ nmap tt :CocCommand explorer<CR>
 nmap ts <Plug>(coc-translator-p)
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
+	execute 'CocCommand actions.open ' . a:type
 endfunction
 xmap <LEADER>a  <Plug>(coc-codeaction-selected)
 nmap <LEADER>aw  <Plug>(coc-codeaction-selected)w
@@ -886,7 +912,7 @@ set shell=bash\ -i
 
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
-let g:mkdp_auto_start = 1
+"let g:mkdp_auto_start = 1
 
 " set to 1, the nvim will auto close current preview window when change
 " from markdown buffer to another buffer
@@ -943,18 +969,18 @@ let g:mkdp_browserfunc = ''
 " content_editable: if enable content editable for preview page, default: v:false
 " disable_filename: if disable filename header for preview page, default: 0
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
+			\ 'mkit': {},
+			\ 'katex': {},
+			\ 'uml': {},
+			\ 'maid': {},
+			\ 'disable_sync_scroll': 0,
+			\ 'sync_scroll_type': 'middle',
+			\ 'hide_yaml_meta': 1,
+			\ 'sequence_diagrams': {},
+			\ 'flowchart_diagrams': {},
+			\ 'content_editable': v:false,
+			\ 'disable_filename': 0
+			\ }
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
@@ -979,6 +1005,7 @@ let g:mkdp_filetypes = ['markdown']
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 
+noremap <LEADER>mv :MarkdownPreview<CR>
 
 " If you have nodejs and yarn
 
@@ -1006,21 +1033,21 @@ let g:fzf_preview_window = 'right:60%'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 function! s:list_buffers()
-  redir => list
-  silent ls
-  redir END
-  return split(list, "\n")
+	redir => list
+	silent ls
+	redir END
+	return split(list, "\n")
 endfunction
 
 function! s:delete_buffers(lines)
-  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+	execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
 command! BD call fzf#run(fzf#wrap({
-  \ 'source': s:list_buffers(),
-  \ 'sink*': { lines -> s:delete_buffers(lines) },
-  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-\ }))
+			\ 'source': s:list_buffers(),
+			\ 'sink*': { lines -> s:delete_buffers(lines) },
+			\ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+			\ }))
 
 noremap <c-d> :BD<CR>
 
@@ -1036,17 +1063,17 @@ let g:Lf_PreviewCode = 1
 let g:Lf_ShowHidden = 1
 let g:Lf_ShowDevIcons = 1
 "let g:Lf_CommandMap = {
-"\   '<C-k>': ['<C-u>'],
-"\   '<C-j>': ['<C-e>'],
-"\   '<C-]>': ['<C-v>'],
-"\   '<C-p>': ['<C-n>'],
+			"\   '<C-k>': ['<C-u>'],
+			"\   '<C-j>': ['<C-e>'],
+			"\   '<C-]>': ['<C-v>'],
+			"\   '<C-p>': ['<C-n>'],
 "\}
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
 let g:Lf_WildIgnore = {
-        \ 'dir': ['.git', 'vendor', 'node_modules'],
-        \ 'file': ['__vim_project_root', 'class']
-        \}
+			\ 'dir': ['.git', 'vendor', 'node_modules'],
+			\ 'file': ['__vim_project_root', 'class']
+			\}
 let g:Lf_UseMemoryCache = 0
 let g:Lf_UseCache = 0
 
@@ -1123,8 +1150,8 @@ let g:VM_maps["Redo"]               = '<C-r>'
 " ===
 noremap <LEADER>f :F  **/*<left><left><left><left><left>
 let g:far#mapping = {
-		\ "replace_undo" : ["l"],
-		\ }
+			\ "replace_undo" : ["l"],
+			\ }
 
 set lazyredraw            " improve scrolling performance when navigating through large results
 set regexpengine=1        " use old regexp engine
@@ -1170,11 +1197,11 @@ let g:vista_default_executive = 'coc'
 let g:vista_fzf_preview = ['right:50%']
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
+			\   "function": "\uf794",
+			\   "variable": "\uf71b",
+			\  }
 " function! NearestMethodOrFunction() abort
-" 	return get(b:, 'vista_nearest_method_or_function', '')
+"		return get(b:, 'vista_nearest_method_or_function', '')
 " endfunction
 " set statusline+=%{NearestMethodOrFunction()}
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
@@ -1280,13 +1307,13 @@ let g:vimtex_view_method = 'zathura'
 
 
 let g:vimtex_toc_config = {
-\ 'name' : 'TOC',
-\ 'layers' : ['content', 'todo', 'include'],
-\ 'split_width' : 25,
-\ 'todo_sorted' : 0,
-\ 'show_help' : 1,
-\ 'show_numbers' : 1,
-\}
+			\ 'name' : 'TOC',
+			\ 'layers' : ['content', 'todo', 'include'],
+			\ 'split_width' : 25,
+			\ 'todo_sorted' : 0,
+			\ 'show_help' : 1,
+			\ 'show_numbers' : 1,
+			\}
 
 " map
 autocmd FileType tex noremap tc :VimtexTocToggle<CR>
@@ -1473,7 +1500,7 @@ noremap \p :echo expand('%:p')<CR>
 "set sessionoptions-=options
 "noremap sl :OpenSession<CR>
 "noremap sS :SaveSession<CR>
-"noremap ss :SaveSession 
+"noremap ss :SaveSession
 "noremap sc :SaveSession<CR>:CloseSession<CR>:q<CR>
 "noremap so :OpenSession default<CR>
 "noremap sD :DeleteSession<CR>
@@ -1534,30 +1561,30 @@ let g:vmt_fence_closing_text = '/TOC'
 " ===
 " === rnvimr
 " ===
-" let g:rnvimr_ex_enable = 1
-" let g:rnvimr_pick_enable = 1
-" let g:rnvimr_draw_border = 0
-" " let g:rnvimr_bw_enable = 1
-" highlight link RnvimrNormal CursorLine
-" nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-" let g:rnvimr_action = {
-"             \ '<C-t>': 'NvimEdit tabedit',
-"             \ '<C-x>': 'NvimEdit split',
-"             \ '<C-v>': 'NvimEdit vsplit',
-"             \ 'gw': 'JumpNvimCwd',
-"             \ 'yw': 'EmitRangerCwd'
-"             \ }
-" let g:rnvimr_layout = { 'relative': 'editor',
-"             \ 'width': &columns,
-"             \ 'height': &lines,
-"             \ 'col': 0,
-"             \ 'row': 0,
-"             \ 'style': 'minimal' }
-"vlet g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
-"
-tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-nnoremap <silent> <LEADER>rm :RnvimrToggle<CR>
-tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+let g:rnvimr_ex_enable = 1
+let g:rnvimr_pick_enable = 1
+let g:rnvimr_draw_border = 0
+" let g:rnvimr_bw_enable = 1
+highlight link RnvimrNormal CursorLine
+nnoremap <silent> <leader>rm :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
+let g:rnvimr_layout = { 'relative': 'editor',
+            \ 'width': &columns,
+            \ 'height': &lines,
+            \ 'col': 0,
+            \ 'row': 0,
+            \ 'style': 'minimal' }
+let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+
+" tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+" nnoremap <silent> <LEADER>rm :RnvimrToggle<CR>
+" tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
 " ===
 " === vim-subversive
 " ===
@@ -1643,20 +1670,20 @@ let g:agit_no_default_mappings = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"typescript", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
-  },
+ensure_installed = {"typescript", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
+highlight = {
+enable = true,              -- false will disable the whole extension
+disable = { "c", "rust" },  -- list of language that will be disabled
+},
 	 rainbow = {
-    enable = true,
-    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
-  },
-}
+	 enable = true,
+	 -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+	 extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+	 max_file_lines = nil, -- Do not enable for files with more than n lines, int
+	 -- colors = {}, -- table of hex strings
+	 -- termcolors = {} -- table of colour name strings
+	 },
+ }
 EOF
 
 

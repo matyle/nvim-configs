@@ -1,11 +1,13 @@
 ## QWER用户使用
 
-[English Version](./README_EN.md)
+[English Version](./README.EN)
 
 请不要只复制这份配置文件夹而不认真看它！请至少阅读一下这份自述文件！
 
 ---
 基于 [theniceboy](https://github.com/theniceboy)
+
+- test
 
 
 <!-- TOC GFM -->
@@ -64,7 +66,7 @@
 	- [Git 相关](#git-相关)
 		+ [vim-gitgutter](#vim-gitgutter)
 		+ [fzf-gitignore](#fzf-gitignore)
-		+ [blamer blamer](#blamer-blamer)
+		+ [blamer](#blamer)
 	- [其它](#其它-1)
 		+ [vim-calendar](#vim-calendar)
 		+ [Goyo - 不会分心地工作](#goyo---不会分心地工作)
@@ -82,6 +84,7 @@
 		+ [快捷键](#快捷键-1)
 		+ [nvim内置lsp尝试](#nvim内置lsp尝试)
 		+ [nvim 图片](#nvim-图片)
+		+ [nvim-snippets](#nvim-snippets)
 
 <!-- /TOC -->
 
@@ -271,11 +274,11 @@
 - [ ] 确定你已经安装了 ranger
 
 按 `R` 键打开 ranger (文件选择器)
-
+尽量不要直接打开，而是使用c-t
 在 rnvimr (ranger) 中, 你可以:
 | 快捷键     | 行为                 |
 |------------|----------------------|
-| `Ctrl` `t` | 在新标签页中打开文件 |
+| `Ctrl` `t` | 在新标签页中打开文件(重要) |
 | `Ctrl` `x` | 上下分裂打开当前文件 |
 | `Ctrl` `v` | 左右分裂打开所选文件 |
 
@@ -468,10 +471,10 @@ c
 按 `Space` `g` `i` 来创建一个 `.gitignore` 文件
 
 <img alt="Png" src="https://user-images.githubusercontent.com/25827968/42945393-96c662da-8b68-11e8-8279-5bcd2e956ca9.png" width="60%" />
-
 <img alt="Png" src="https://raw.githubusercontent.com/airblade/vim-gitgutter/master/screenshot.png" width="60%" />
 
-#### blamer [blamer](https://github.com/APZelos/blamer.nvim) 
+
+#### [blamer](https://github.com/APZelos/blamer.nvim) 
 类似于vscode中的gitlen 能够显示谁修改的代码
 `Plug 'APZelos/blamer.nvim'` 
 
@@ -597,3 +600,8 @@ tv:`VimtexView`
 
 #### nvim 图片
 首先：upic上传图片
+
+#### nvim-snippets
+展开：c-l （expand）
+选择：c-j
+下一个placeholder：c-j
