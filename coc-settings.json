@@ -86,7 +86,8 @@
 			"svelte",
 			"c",
 			"cs",
-			"prisma"
+			"prisma",
+			"go"
 		],
 		"coc.source.vimtex.enable": true,
 		"coc.source.vimtex.priority":100,
