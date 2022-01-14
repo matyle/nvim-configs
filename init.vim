@@ -1378,10 +1378,9 @@ let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 0
 let g:go_doc_keywordprg_enabled = 0
 
-let g:go_fmt_command = "goimports"
+"autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 "let g:go_def_mode='gopls'
 "let g:go_info_mode='gopls'
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 " autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
 " autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
 " autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
