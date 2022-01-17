@@ -544,7 +544,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'Konfekt/FastFold'
 "
-"Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo'
 "Plug 'wellle/context.vim'
 Plug 'svermeulen/vim-subversive'
 Plug 'theniceboy/argtextobj.vim'
@@ -592,7 +592,7 @@ Plug 'wincent/terminus'
 
 
 " Other useful utilities
-"Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
+Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 "Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
@@ -895,8 +895,8 @@ nmap <LEADER>aw  <Plug>(coc-codeaction-selected)w
 " coc-tasks
 " noremap <silent> <leader>ts :CocList tasks<CR>
 " coc-snippets
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
+imap <C-k> <Plug>(coc-snippets-expand)
+vmap <C-l> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-n>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
@@ -1029,7 +1029,7 @@ noremap <silent> <C-h> :History<CR>
 noremap <silent> <C-w> :Buffers<CR>
 noremap <leader>; :History:<CR>
 
-let g:fzf_preview_window = 'right:60%'
+let g:fzf_preview_window = 'right:50%'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 function! s:list_buffers()
@@ -1051,7 +1051,7 @@ command! BD call fzf#run(fzf#wrap({
 
 noremap <c-d> :BD<CR>
 
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
 
 
 " ===
@@ -1081,8 +1081,8 @@ let g:Lf_UseCache = 0
 " ===
 " === CTRLP (Dependency for omnisharp)
 " ===
-let g:ctrlp_map = ''
-let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_map = ''
+" let g:ctrlp_cmd = 'CtrlP'
 
 
 " ===
@@ -1194,7 +1194,7 @@ noremap <LEADER>v :Vista!!<CR>
 noremap <c-t> :silent! Vista finder coc<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
-let g:vista_fzf_preview = ['right:50%']
+let g:vista_fzf_preview = ['right:40%']
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
 			\   "function": "\uf794",
@@ -1211,7 +1211,7 @@ let g:scrollstatus_size = 15
 " ===
 " === fzf-gitignore
 " ===
-noremap <LEADER>gk :FzfGitignore<CR>
+" noremap <LEADER>gk :FzfGitignore<CR>
 
 
 " ===
