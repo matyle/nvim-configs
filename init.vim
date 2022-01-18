@@ -1,16 +1,12 @@
-" __  ____   __  _   ___     _____ __  __ ____   ____
-"|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
-"| |\/| |\ v /  |  \| |\ \ / / | || |\/| | |_) | |
-"| |  | | | |   | |\  | \ v /  | || |  | |  _ <| |___
-"|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
-" author: @theniceboy
-" modify: @matytan
-" checkout-list
-" vim-esearch
-" fmoralesc/worldslice
-" sidofc/mkdx
-
+"                  _         _              
+"  _ __ ___   __ _| |_ _   _| |_ __ _ _ __  
+" | '_ ` _ \ / _` | __| | | | __/ _` | '_ \ 
+" | | | | | | (_| | |_| |_| | || (_| | | | |
+" |_| |_| |_|\__,_|\__|\__, |\__\__,_|_| |_|
+"                      |___/                
+" author: @matytan
+" vimplug install
 
 " ===
 " === Auto load for first time uses
@@ -160,17 +156,6 @@ noremap <silent> <LEADER>o za
 
 " nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
-" ===
-" === Cursor Movement
-" ===
-" New cursor movement (the default arrow keys are used for resizing windows)
-"     ^
-"     u
-" < n   i >
-"     e
-"     v
-"     now change qwert keyboard
-" U/E keys for 5 times u/e (faster navigation)
 noremap <silent> K 5k
 noremap <silent> J 5j
 
@@ -186,7 +171,7 @@ noremap B 5b
 " set h (same as n, cursor left) to 'end of word'
 "noremap e
 
-" Ctrl + U or E will move up/down the view port without moving the cursor
+" Ctrl + K or J will move up/down the view port without moving the cursor
 noremap <C-K> 5<C-y>
 noremap <C-J> 5<C-e>
 
@@ -308,7 +293,7 @@ noremap <C-c> zz
 autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
-noremap tx :r !figlet
+noremap tx :r !figlet 
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -502,7 +487,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-"Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 
