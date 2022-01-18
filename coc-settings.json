@@ -70,10 +70,10 @@
 		"$HOME/.config/nvim/Ultisnips/",
 		"$HOME/.config/nvim/snippets/",
 		"$HOME/.config/nvim/plugged/vim-snippets/snippets"
-	],
-	// "snippets.extends": {
-		//	"latex":["tex","texmath"]
-		// },
+	 ],
+	"snippets.extends": {
+			"latex":["tex","texmath"]
+		},
 		"coc.preferences.formatOnSaveFiletypes": [
 			"javascript",
 			"typescript",
@@ -86,8 +86,7 @@
 			"svelte",
 			"c",
 			"cs",
-			"prisma",
-			"go"
+			"prisma"
 		],
 		"coc.source.vimtex.enable": true,
 		"coc.source.vimtex.priority":100,

@@ -366,6 +366,9 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
+" For Vim-Plug
+Plug 'EdenEast/nightfox.nvim'
+
 Plug 'vim-pandoc/vim-pandoc'
 
 Plug '907th/vim-auto-save'
@@ -674,9 +677,10 @@ let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
-"colorscheme sonokai
+" colorscheme sonokai
 
-colorscheme nord
+colorscheme nordfox 
+"colorscheme nord
 "color dracula
 "color one
 "color deus
@@ -709,7 +713,7 @@ lua << END
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = 'sonokai',
+		theme = auto,
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
 		disabled_filetypes = {},
@@ -1227,7 +1231,6 @@ let g:tex_flavor = 'latex'
 " This is necessary for VimTeX to load properly. The "indent" is optional.
 " Note that most plugin managers will do this automatically.
 "filetype plugin indent on
-
 " This enables Vim's and neovim's syntax-related features. Without this, some
 " VimTeX features will not work (see ":help vimtex-requirements" for more
 " info).
@@ -1237,10 +1240,11 @@ let g:tex_flavor = 'latex'
 " viewer method:
 let g:vimtex_view_method = 'zathura'
 
+" let g:tex_conceal = ""
 " Or with a generic interface:
 let g:vimtex_view_general_viewer = 'zathura'
 "let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-
+let g:vimtex_syntax_conceal_disable = 1
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
 " want another compiler backend, you can change it as follows. The list of
