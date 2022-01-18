@@ -128,8 +128,10 @@ noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
 
 " Insert Key
 
+
+
 " make Y to copy till the end of the line
-nnoremap Y y$
+nnoremap ya y$
 
 " Copy to system clipboard
 noremap Y "+y

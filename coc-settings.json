@@ -1,3 +1,4 @@
+
 {
 	"coc.preferences.semanticTokensHighlights": false,
 	"coc.preferences.enableFloatHighlight": true,
@@ -70,58 +71,58 @@
 		"$HOME/.config/nvim/Ultisnips/",
 		"$HOME/.config/nvim/snippets/",
 		"$HOME/.config/nvim/plugged/vim-snippets/snippets"
-	 ],
+	],
 	"snippets.extends": {
-			"latex":["tex","texmath"]
+		"latex":["tex","texmath"]
+	},
+	"coc.preferences.formatOnSaveFiletypes": [
+		"javascript",
+		"typescript",
+		"html",
+		"css",
+		"json",
+		"java",
+		"python",
+		"vue",
+		"svelte",
+		"c",
+		"cs",
+		"prisma"
+	],
+	"coc.source.vimtex.enable": true,
+	"coc.source.vimtex.priority":100,
+	"coc.source.vimtex.filetypes": [
+		"tex",
+		"plaintex",
+		"latex"
+	],
+	"yaml.format.enable": true,
+	"signature.target": "float",
+	"yank.enableCompletion": false,
+	"typescript.suggestionActions.enabled": true,
+	"typescript.format.enabled": true,
+	"jest.watch": false,
+	"explorer.width": 38,
+	"explorer.quitOnOpen": true,
+	"explorer.sources": [
+		{
+			"name": "buffer",
+			"expand": false
 		},
-		"coc.preferences.formatOnSaveFiletypes": [
-			"javascript",
-			"typescript",
-			"html",
-			"css",
-			"json",
-			"java",
-			"python",
-			"vue",
-			"svelte",
-			"c",
-			"cs",
-			"prisma"
-		],
-		"coc.source.vimtex.enable": true,
-		"coc.source.vimtex.priority":100,
-		"coc.source.vimtex.filetypes": [
-			"tex",
-			"plaintex",
-			"latex"
-		],
-		"yaml.format.enable": true,
-		"signature.target": "float",
-		"yank.enableCompletion": false,
-		"typescript.suggestionActions.enabled": true,
-		"typescript.format.enabled": true,
-		"jest.watch": false,
-		"explorer.width": 38,
-		"explorer.quitOnOpen": true,
-		"explorer.sources": [
-			{
-				"name": "buffer",
-				"expand": false
-			},
-			{
-				"name": "file",
-				"expand": true
-			}
-		],
-		"explorer.file.column.indent.indentLine": true,
-		"explorer.file.showHiddenFiles": true,
-		"explorer.icon.enableNerdfont": true,
-		//	"explorer.file.column.git.showIgnored": true,
-		"explorer.keyMappingMode": "none",
-		"explorer.buffer.showHiddenBuffers": false,
-		"explorer.keyMappings.global": {
-			"i": false, // cancel default mapkey
-			"<c-o>": "noop",
+		{
+			"name": "file",
+			"expand": true
+		}
+	],
+	"explorer.file.column.indent.indentLine": true,
+	"explorer.file.showHiddenFiles": true,
+	"explorer.icon.enableNerdfont": true,
+	//	"explorer.file.column.git.showIgnored": true,
+	"explorer.keyMappingMode": "none",
+	"explorer.buffer.showHiddenBuffers": false,
+	"explorer.keyMappings.global": {
+		"i": false, // cancel default mapkey
+		"<c-o>": "noop",
 
 			"*": "toggleSelection",
 			"<tab>": "actionMenu",
@@ -207,8 +208,8 @@
 		"flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": false,
 		"flutter.trace.server": "off",
 		//"tslint.autoFixOnSave": false,
-		//"python.autoComplete.addBrackets": true,
-		//"python.jediEnabled": false,
+		"python.autoComplete.addBrackets": true,
+		"python.jediEnabled": false,
 		"python.formatting.provider": "yapf",
 		"python.formatting.yapfArgs": [
 			"--style",
@@ -270,9 +271,9 @@
 						"filetypes": ["go"],
 						"disableWorkspaceFolders": true,
 						"initializationOptions": {
-							// "usePlaceholders": true
+							"usePlaceholders": true,
 							// "gocodeCompletionEnabled": true,
-							// "diagnosticsEnabled": true,
+							"diagnosticsEnabled": true
 							// "lintTool": "golint"
 						}
 					},
