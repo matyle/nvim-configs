@@ -1,10 +1,10 @@
 
-"                  _         _              
-"  _ __ ___   __ _| |_ _   _| |_ __ _ _ __  
-" | '_ ` _ \ / _` | __| | | | __/ _` | '_ \ 
+"                  _         _
+"  _ __ ___   __ _| |_ _   _| |_ __ _ _ __
+" | '_ ` _ \ / _` | __| | | | __/ _` | '_ \
 " | | | | | | (_| | |_| |_| | || (_| | | | |
 " |_| |_| |_|\__,_|\__|\__, |\__\__,_|_| |_|
-"                      |___/                
+"                      |___/
 " author: @matytan
 " vimplug install
 
@@ -123,6 +123,7 @@ noremap S :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
+noremap <LEADER>rd :e $HOME/.config/nvim/README.md<CR>
 "
 
 
@@ -295,7 +296,7 @@ noremap <C-c> zz
 autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
-noremap tx :r !figlet 
+noremap tx :r !figlet
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -370,6 +371,10 @@ call plug#begin('$HOME/.config/nvim/plugged')
 
 " For Vim-Plug
 Plug 'EdenEast/nightfox.nvim'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'idanarye/vim-merginal'
 
 Plug 'vim-pandoc/vim-pandoc'
 
@@ -681,7 +686,7 @@ let g:sonokai_disable_italic_comment = 1
 
 " colorscheme sonokai
 
-colorscheme nordfox 
+colorscheme nordfox
 "colorscheme nord
 "color dracula
 "color one
@@ -1558,18 +1563,18 @@ let g:rnvimr_draw_border = 0
 highlight link RnvimrNormal CursorLine
 nnoremap <silent> <leader>rm :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 let g:rnvimr_action = {
-            \ '<C-t>': 'NvimEdit tabedit',
-            \ '<C-x>': 'NvimEdit split',
-            \ '<C-v>': 'NvimEdit vsplit',
-            \ 'gw': 'JumpNvimCwd',
-            \ 'yw': 'EmitRangerCwd'
-            \ }
+			\ '<C-t>': 'NvimEdit tabedit',
+			\ '<C-x>': 'NvimEdit split',
+			\ '<C-v>': 'NvimEdit vsplit',
+			\ 'gw': 'JumpNvimCwd',
+			\ 'yw': 'EmitRangerCwd'
+			\ }
 let g:rnvimr_layout = { 'relative': 'editor',
-            \ 'width': &columns,
-            \ 'height': &lines,
-            \ 'col': 0,
-            \ 'row': 0,
-            \ 'style': 'minimal' }
+			\ 'width': &columns,
+			\ 'height': &lines,
+			\ 'col': 0,
+			\ 'row': 0,
+			\ 'style': 'minimal' }
 let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
 " tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
@@ -1620,7 +1625,7 @@ let g:dartfmt_options = ["-l 100"]
 " ===
 " === tcomment_vim
 " " =
-nnoremap ci cl
+" nnoremap ci cl
 let g:tcomment_textobject_inlinecomment = ''
 nmap <LEADER>cn g>c
 vmap <LEADER>cn g>
@@ -1634,12 +1639,22 @@ vmap <LEADER>cu g<
 let g:move_key_modifier = 'C'
 
 
+
 " ===
 " === any-jump
 " ===
-nnoremap gj :AnyJump<CR>
-let g:any_jump_window_width_ratio  = 0.8
+nnoremap gj  :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap gj :AnyJumpVisual<CR>
+
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ga :AnyJumpBack<CR>
+
+" Normal mode: open last closed search window again
+nnoremap <leader>gb :AnyJumpLastResults<CR>
+let g:any_jump_window_width_ratio	= 0.8
 let g:any_jump_window_height_ratio = 0.9
+let g:any_jump_disable_default_keybindings = 1
 
 
 " ===
@@ -1686,28 +1701,7 @@ let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
 
-" " AutoSave
-" lua << EOF
-" local autosave = require("autosave")
-"
-" autosave.setup(
-"     {
-"         enabled = true,
-"         execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-"         events = {"InsertLeave", "TextChanged"},
-"         conditions = {
-"             exists = true,
-"             filename_is_not = {},
-"             filetype_is_not = {},
-"             modifiable = true
-"         },
-"         write_all_buffers = false,
-"         on_off_commands = true,
-"         clean_command_line_interval = 0,
-"         debounce_delay = 135
-"     }
-" )
-" EOF
+
 
 " ===================== End of Plugin Settings =====================
 

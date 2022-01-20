@@ -391,6 +391,7 @@ c
 | 例 | `ySS` `<div` Enter   | `Hello world!` =><br> `<div>` <br> &nbsp;&nbsp; `Hello world! ` <br> `<div>`     |
 |    | ySs                  | 与ySs功能相同                                                                    |
 
+{ string }
 
 可视模式
 --------

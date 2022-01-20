@@ -273,7 +273,7 @@
 						"initializationOptions": {
 							"usePlaceholders": true,
 							// "gocodeCompletionEnabled": true,
-							"diagnosticsEnabled": true
+							//"diagnosticsEnabled": true
 							// "lintTool": "golint"
 						}
 					},
