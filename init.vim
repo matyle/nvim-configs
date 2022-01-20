@@ -529,7 +529,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
-Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
+" Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
+Plug 'tpope/vim-commentary'
 Plug 'theniceboy/antovim' " gs to switch
 Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
@@ -1626,12 +1627,15 @@ let g:dartfmt_options = ["-l 100"]
 " === tcomment_vim
 " " =
 " nnoremap ci cl
-let g:tcomment_textobject_inlinecomment = ''
-nmap <LEADER>cn g>c
-vmap <LEADER>cn g>
-nmap <LEADER>cu g<c
-vmap <LEADER>cu g<
-
+" let g:tcomment_textobject_inlinecomment = ''
+" nmap <LEADER>cn g>c
+" vmap <LEADER>cn g>
+" nmap <LEADER>cu g<c
+" vmap <LEADER>cu g<
+" use the commentary plug
+" gcc normal mode can comment and uncomment
+" gc  visual mode
+" gcap comment the graph
 
 " ===
 " === vim-move
@@ -1685,7 +1689,7 @@ disable = { "c", "rust" },  -- list of language that will be disabled
 	 -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
 	 extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 	 max_file_lines = nil, -- Do not enable for files with more than n lines, int
-	 -- colors = {}, -- table of hex strings
+	 -- colors = {nightfox}, -- table of hex strings
 	 -- termcolors = {} -- table of colour name strings
 	 },
  }

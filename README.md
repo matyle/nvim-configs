@@ -391,7 +391,6 @@ c
 | 例 | `ySS` `<div` Enter   | `Hello world!` =><br> `<div>` <br> &nbsp;&nbsp; `Hello world! ` <br> `<div>`     |
 |    | ySs                  | 与ySs功能相同                                                                    |
 
-{ string }
 
 可视模式
 --------
@@ -565,7 +564,12 @@ c
 **注意: 目前, 使用此移动方式, 你最多只能垂直移动 199 行!**
 
 ### 快速注释
-使用 空格+ cn 快速注释某一行
+`gcc `normal mode can comment and uncomment
+`gc  `visual mode
+`gcap` comment the graph
+You can also use it as a command, either with a range like :7,17Commentary, 
+or as part of a :global invocation like with :g/TODO/Commentary.
+
 <!-- test -->
 
 ### Latex使用
