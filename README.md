@@ -1,13 +1,25 @@
 ## QWER用户使用
 
-[English Version](./README.EN)
+### 外观
+#### vim
 
-请不要只复制这份配置文件夹而不认真看它！请至少阅读一下这份自述文件！
+- 运行程序
+
+<img alt="Png" src= https://gitee.com/matytan/tupic/raw/master/uPic/rqNYqE.png 
+ width="60%" />
+
+- 补全
+
+<img alt="Png" src= https://gitee.com/matytan/tupic/raw/master/uPic/SScDLr.png width="60%" />
+
+#### range 界面
+<img alt="Png" src= https://gitee.com/matytan/tupic/raw/master/uPic/Yuv1Ov.png 
+ width="60%" />
+注意：请不要只复制这份配置文件夹而不认真看它！请至少阅读一下这份自述文件！欢迎star
 
 ---
-基于 [theniceboy](https://github.com/theniceboy)
+基于 [theniceboy](https://github.com/theniceboy) 添加修改
 
-- test
 
 
 <!-- TOC GFM -->

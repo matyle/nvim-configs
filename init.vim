@@ -536,7 +536,7 @@ Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to c
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'godlygeek/tabular' " ga, or :Tabularize <regex> to align
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-Easymotion'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'Konfekt/FastFold'
 "
@@ -1409,18 +1409,6 @@ let g:go_doc_keywordprg_enabled = 0
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
-" map ' <Plug>(easymotion-overwin-f2)
-" nmap ' <Plug>(easymotion-overwin-f2)
-"map E <Plug>(easymotion-j)
-"map U <Plug>(easymotion-k)
-"nmap f <Plug>(easymotion-overwin-f)
-"map \; <Plug>(easymotion-prefix)
-"nmap ' <Plug>(easymotion-overwin-f2)
-"map 'l <Plug>(easymotion-bd-jk)
-"nmap 'l <Plug>(easymotion-overwin-line)
-"map  'w <Plug>(easymotion-bd-w)
-"nmap 'w <Plug>(easymotion-overwin-w)
-
 
 " ===
 " === goyo
