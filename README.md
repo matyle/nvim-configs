@@ -15,6 +15,7 @@
 #### range 界面
 <img alt="Png" src= https://gitee.com/matytan/tupic/raw/master/uPic/Yuv1Ov.png 
  width="60%" />
+
 注意：请不要只复制这份配置文件夹而不认真看它！请至少阅读一下这份自述文件！欢迎star
 
 ---
