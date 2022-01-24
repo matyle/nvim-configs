@@ -575,7 +575,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
-Plug 'luochen1990/rainbow'
+" Plug 'luochen1990/rainbow'
 Plug 'mg979/vim-xtabline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
@@ -1413,7 +1413,7 @@ let g:EasyMotion_smartcase = 1
 " ===
 " === goyo
 " ===
-map <LEADER>gy :Goyo<CR>
+map <LEADER>gy :Goyo 130<CR>
 
 
 " ===
