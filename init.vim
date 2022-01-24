@@ -73,6 +73,10 @@ set formatoptions-=tc
 set splitright
 set splitbelow
 set noshowmode
+" 避免当行过长卡顿
+set synmaxcol=400
+set lazyredraw
+" set ttyfast
 set showcmd
 set wildmenu
 set ignorecase
@@ -107,6 +111,7 @@ let g:neoterm_autoscroll = 1
 " tnoremap <C-K> <C-\><C-K>
 " tnoremap <C-O> <C-\><C-K><C-O>
 noremap <c-\> :ToggleTerm size=20 direction=float<CR>
+nnoremap <F4> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
 
 
 " ===
@@ -376,7 +381,7 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'idanarye/vim-merginal'
 
-Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc'
 
 Plug '907th/vim-auto-save'
 "安装插件
@@ -415,6 +420,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 " General Highlighter
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'RRethy/vim-illuminate'
+Plug 'junegunn/limelight.vim'
 
 " File navigation
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -721,7 +727,7 @@ lua << END
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = auto,
+		theme = "sonokai",
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
 		disabled_filetypes = {},
