@@ -74,9 +74,7 @@ set splitright
 set splitbelow
 set noshowmode
 " 避免当行过长卡顿
-set synmaxcol=400
-set lazyredraw
-" set ttyfast
+" set synmaxcol=500
 set showcmd
 set wildmenu
 set ignorecase
@@ -110,7 +108,7 @@ let g:neoterm_autoscroll = 1
 " autocmd TermOpen term://* startinsert
 " tnoremap <C-K> <C-\><C-K>
 " tnoremap <C-O> <C-\><C-K><C-O>
-noremap <c-\> :ToggleTerm size=20 direction=float<CR>
+noremap <c-\> :ToggleTerm size=15<CR>
 nnoremap <F4> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
 
 
@@ -535,7 +533,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
-" Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 Plug 'tpope/vim-commentary'
 Plug 'theniceboy/antovim' " gs to switch
 Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
@@ -693,8 +690,8 @@ let g:sonokai_disable_italic_comment = 1
 
 " colorscheme sonokai
 
-colorscheme nordfox
-"colorscheme nord
+" colorscheme nordfox
+colorscheme nord
 "color dracula
 "color one
 "color deus
@@ -1549,14 +1546,16 @@ let g:vmt_fence_closing_text = '/TOC'
 
 
 " ===
-" === rnvimr
+" === rnvimr,ranger
 " ===
-let g:rnvimr_ex_enable = 1
+" let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
-let g:rnvimr_draw_border = 0
+" let g:rnvimr_draw_border = 0
 " let g:rnvimr_bw_enable = 1
 highlight link RnvimrNormal CursorLine
-nnoremap <silent> <leader>rm :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+" nnoremap <silent> <leader>rm :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+nnoremap <silent> <leader>rm :RnvimrToggle<CR>
+tnoremap <silent> <leader>rm <C-\><C-n>:RnvimrToggle<CR>
 let g:rnvimr_action = {
 			\ '<C-t>': 'NvimEdit tabedit',
 			\ '<C-x>': 'NvimEdit split',
@@ -1564,15 +1563,31 @@ let g:rnvimr_action = {
 			\ 'gw': 'JumpNvimCwd',
 			\ 'yw': 'EmitRangerCwd'
 			\ }
-let g:rnvimr_layout = { 'relative': 'editor',
-			\ 'width': &columns,
-			\ 'height': &lines,
-			\ 'col': 0,
-			\ 'row': 0,
-			\ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
-" tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+" " Add views for Ranger to adapt the size of floating window
+" let g:rnvimr_ranger_views = [
+" 			\ {'minwidth': 90, 'ratio': []},
+" 			\ {'minwidth': 50, 'maxwidth': 89, 'ratio': [1,1]},
+" 			\ {'maxwidth': 49, 'ratio': [1]}
+" 			\ ]
+" " Customize initial layout
+" let g:rnvimr_layout = {
+" 			\ 'relative': 'editor',
+" 			\ 'width': float2nr(round(0.7 * &columns)),
+" 			\ 'height': float2nr(round(0.7 * &lines)),
+" 			\ 'col': float2nr(round(0.15 * &columns)),
+" 			\ 'row': float2nr(round(0.15 * &lines)),
+" 			\ 'style': 'minimal'
+" 			\ }
+" let g:rnvimr_layout = { 'relative': 'editor',
+" 			\ 'width': &columns,
+" 			\ 'height': &lines,
+" 			\ 'col': 0,
+" 			\ 'row': 0,
+" 			\ 'style': 'minimal' }
+" let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+
+" " tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
 " nnoremap <silent> <LEADER>rm :RnvimrToggle<CR>
 " tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
 " ===
