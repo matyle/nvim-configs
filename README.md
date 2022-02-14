@@ -290,7 +290,9 @@
 <img alt="Gif" src="https://puremourning.github.io/vimspector-web/img/vimspector-overview.png" width="60%" />
 
 ### 文件浏览
+
 #### [coc-explorer - 文件浏览器](https://github.com/weirongxu/coc-explorer)
+
 | 快捷键 | 行为                  |
 |--------|-----------------------|
 | `tt`   | **打开文件浏览器**    |
@@ -367,16 +369,16 @@ See `:help table-mode.txt` for more.
 
 #### [vim-surround](https://github.com/tpope/vim-surround)
 想要添加包裹符号 (`string` -> `"string"`):
-```
+```bash
 	"string"
 ```
 
 按下: `ysw'`:
-```
+```bash
 "string"
 ```
 按下：`yss`
-``` 
+``` bash
 "hello, world"
 c
 ```
@@ -384,7 +386,7 @@ c
 
 
 想要修改包裹符号
-```
+```bash
 "string"
 ```
 按下: `cs'"`:

@@ -690,25 +690,21 @@ let g:sonokai_disable_italic_comment = 1
 
 " colorscheme sonokai
 
-" colorscheme nordfox
-colorscheme nord
+colorscheme nightfox
+" colorscheme nord
 "color dracula
-"color one
+" color one
 "color deus
 "color gruvbox
 "let ayucolor="light"
 "color ayu
 "color xcodelighthc
-"set background=light
 "set cursorcolumn
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
 " ===================== Start of Plugin Settings =====================
-" ===
-" === snippets
-" ===
 
 
 " ===
@@ -724,7 +720,7 @@ lua << END
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = "sonokai",
+		theme = auto,
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
 		disabled_filetypes = {},
@@ -764,14 +760,14 @@ END
 " p  imgpast  "
 """"""""""""""""""""""
 
-"==p 设置默认储存文件夹。这里表示储存在当前文档所在文件夹下的'pic'文件夹下，相当于 ./pic/
-let g:mdip_imgdir = 'pic'
-"设置默认图片名称。当图片名称没有给出时，使用默认图片名称
-let g:mdip_imgname = 'image'
-"设置快捷键，个人喜欢 空格 p 的方式，比较直观
-autocmd FileType markdown nnoremap <silent> <LEADER>p:call mdip#MarkdownClipboardImage()<CR>F%i
+""==p 设置默认储存文件夹。这里表示储存在当前文档所在文件夹下的'pic'文件夹下，相当于 ./pic/
+"let g:mdip_imgdir = 'pic'
+""设置默认图片名称。当图片名称没有给出时，使用默认图片名称
+"let g:mdip_imgname = 'image'
+""设置快捷键，个人喜欢 空格 p 的方式，比较直观
+"autocmd FileType markdown nnoremap <silent> <LEADER>p:call mdip#MarkdownClipboardImage()<CR>F%i
 
-"p p pp  p p  ==
+""p p pp  p p  ==
 " == GitGutter
 " ==
 " let g:gitgutter_signs = 0
