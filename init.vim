@@ -105,10 +105,10 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " === Terminal Behaviors
 " ===
 let g:neoterm_autoscroll = 1
-" autocmd TermOpen term://* startinsert
-" tnoremap <C-K> <C-\><C-K>
-" tnoremap <C-O> <C-\><C-K><C-O>
-noremap <c-\> :ToggleTerm size=15<CR>
+autocmd TermOpen term://* startinsert
+tnoremap <C-N> <C-\><C-N>
+tnoremap <C-O> <C-\><C-K><C-O>
+noremap <C-\> :ToggleTerm size=15<CR>
 nnoremap <F4> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
 
 
@@ -282,7 +282,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+" noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -904,7 +904,7 @@ autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 " ===
 "filetype plugin on
 "Uncomment to override defaults:
-set shell=bash\ -i
+" set shell=bash\ -i
 
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
