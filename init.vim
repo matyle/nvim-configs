@@ -43,6 +43,7 @@ let &t_ut=''
 set autochdir
 
 
+
 " ===
 " === Editor behavior
 " ===
@@ -65,6 +66,7 @@ set notimeout
 set viewoptions=cursor,folds,slash,unix
 set wrap
 set tw=0
+set showtabline=1
 set indentexpr=
 set foldmethod=indent
 set foldlevel=99
@@ -73,6 +75,7 @@ set formatoptions-=tc
 set splitright
 set splitbelow
 set noshowmode
+set wildignore+=*/node_modules/*,*/.git/*,.DS_Store,*/venv/*,*/__pycache__/*,*.pyc
 " 避免当行过长卡顿
 " set synmaxcol=500
 set showcmd
@@ -343,7 +346,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
-		:term python3 %
+	:term python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
@@ -435,7 +438,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'liuchengxu/vista.vim'
 
 " Debugger
-" Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -497,10 +500,10 @@ Plug 'pantharshit00/vim-prisma'
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
-" Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
@@ -529,7 +532,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Other filetypes
 " Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
-
+"
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
@@ -588,8 +591,6 @@ Plug 'wincent/terminus'
 """"""""""""""""""""""
 " Plug 'neovim/nvim-lspconfig'
 " Plug 'glepnir/lspsaga.nvim'
-
-
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
 "Plug 'makerj/vim-pdf'
@@ -610,6 +611,11 @@ Plug 'akinsho/toggleterm.nvim'
 "𝐀𝐧𝐝𝐫𝐨𝐦𝐞𝐝𝐚
 "
 Plug 'sainnhe/sonokai'
+" theme
+Plug 'rose-pine/neovim'
+" nerd font icons :D
+Plug 'shadmansaleh/lualine.nvim'
+
 call plug#end()
 "
 """"""""""""""""""""""
@@ -656,6 +662,10 @@ set lazyredraw
 let g:blamer_show_in_visual_modes = 0
 
 
+
+
+
+
 """"""""""""""""""""""
 "  ack use ag  "
 """"""""""""""""""""""
@@ -684,13 +694,19 @@ if has('termguicolors')
 endif
 "
 " The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_style = 'andromeda'
+" let g:sonokai_enable_italic = 1
+" let g:sonokai_disable_italic_comment = 1
 
 " colorscheme sonokai
 
-colorscheme nightfox
+" colorscheme nordfox
+"""""""""""""""
+" colorscheme "
+"""""""""""""""
+let g:rose_pine_variant='moon'
+colorscheme rose-pine
+" colorschemea
 " colorscheme nord
 "color dracula
 " color one
@@ -700,7 +716,8 @@ colorscheme nightfox
 "color ayu
 "color xcodelighthc
 "set cursorcolumn
-
+" swap between light and dark themes for rose-pine (Toggle Theme)
+nnoremap <leader>ct <cmd>lua require('rose-pine.functions').toggle_variant({ 'moon', 'dawn' })<cr>
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
@@ -721,18 +738,23 @@ require('lualine').setup {
 	options = {
 		icons_enabled = true,
 		theme = auto,
-		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
+		component_separators = '|',
+    section_separators = { left = '', right = '' },
 		disabled_filetypes = {},
 		always_divide_middle = true,
 		},
 	sections = {
-		lualine_a = {'mode', 'g:coc_status'},
-		lualine_b = {'branch', 'diff', 'diagnostics'},
-		lualine_c = {'filename'},
+    lualine_a = {
+      { 'mode', separator = { left = '' }, right_padding = 2 },
+    },
+		lualine_b = {'g:coc_status'},
+		lualine_c = {'branch', 'diff', 'diagnostics'},
+		lualine_d = {'filename'},
 		lualine_x = {{"diagnostics", sources = {"nvim_diagnostic"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
-		lualine_z = {'location'}
+    lualine_z = {
+      { 'location', separator = { right = '' }, left_padding = 2 },
+			},
 		},
 	inactive_sections = {
 		lualine_a = {},
@@ -752,6 +774,36 @@ require('lualine').setup {
 		},
 	extensions = {}
 	}
+
+--require('lualine').setup {
+--  options = {
+--    theme = bubbles_theme,
+--    component_separators = '|',
+--    section_separators = { left = '', right = '' },
+--  },
+--  sections = {
+--    lualine_a = {
+--      { 'mode', separator = { left = '' }, right_padding = 2 },
+--    },
+--    lualine_b = { 'filename', 'branch' },
+--    lualine_c = { 'fileformat' },
+--    lualine_x = {},
+--    lualine_y = { 'filetype', 'progress' },
+--    lualine_z = {
+--      { 'location', separator = { right = '' }, left_padding = 2 },
+--    },
+--  },
+--  inactive_sections = {
+--    lualine_a = { 'filename' },
+--    lualine_b = {},
+--    lualine_c = {},
+--    lualine_x = {},
+--    lualine_y = {},
+--    lualine_z = { 'location' },
+--  },
+--  tabline = {},
+--  extensions = {},
+--}
 END
 
 
@@ -849,6 +901,11 @@ function! Show_documentation()
 	endif
 endfunction
 nnoremap gh :call Show_documentation()<CR>
+
+" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" inoremap <silent><script><expr> <c-m> copilot#accept("\<cr>")
+" let g:copilot_no_tab_map = v:true
+
 " set runtimepath^=~/.config/nvim/coc-extensions/coc-flutter-tools/
 " let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
 " let $NVIM_COC_LOG_LEVEL = 'debug'
@@ -904,7 +961,7 @@ autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 " ===
 "filetype plugin on
 "Uncomment to override defaults:
-" set shell=bash\ -i
+set shell=bash\ -i
 
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
@@ -1626,6 +1683,12 @@ let g:asyncrun_open = 6
 let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
 let g:dartfmt_options = ["-l 100"]
+
+
+" delete text without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 
 
 " ===

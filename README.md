@@ -600,6 +600,9 @@ c
 You can also use it as a command, either with a range like :7,17Commentary, 
 or as part of a :global invocation like with :g/TODO/Commentary.
 
+`sec`:注释块 comment section
+
+
 <!-- test -->
 
 ### Latex使用
