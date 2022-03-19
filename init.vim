@@ -112,7 +112,7 @@ autocmd TermOpen term://* startinsert
 tnoremap <C-N> <C-\><C-N>
 tnoremap <C-O> <C-\><C-K><C-O>
 noremap <C-\> :ToggleTerm size=15<CR>
-nnoremap <F4> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
+nnoremap <F9> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
 
 
 " ===
