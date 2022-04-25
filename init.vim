@@ -393,7 +393,7 @@ Plug 'mileszs/ack.vim'
 Plug 'Chiel92/vim-autoformat'
 
 "git
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Plug 'LoricAndre/fzterm.nvim'
 
 Plug 'majutsushi/tagbar'
