@@ -386,7 +386,7 @@ Plug 'idanarye/vim-merginal'
 
 Plug '907th/vim-auto-save'
 "安装插件
-Plug 'ferrine/md-img-paste.vim'
+" Plug 'ferrine/md-img-paste.vim'
 " ag ack
 Plug 'mileszs/ack.vim'
 "自动格式化
@@ -489,10 +489,10 @@ Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'evanleck/vim-svelte', {'branch': 'main'}
 " Plug 'leafOfTree/vim-svelte-plugin'
 " Plug 'leafgarland/typescript-vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'pantharshit00/vim-prisma'
 
@@ -574,11 +574,11 @@ Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 " Mini Vim-APP
 "Plug 'jceb/vim-orgmode'
 "Plug 'mhinz/vim-startify'
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
+" Plug 'skywind3000/asynctasks.vim'
+" Plug 'skywind3000/asyncrun.vim'
 
 " Vim Applications
-Plug 'itchyny/calendar.vim'
+" Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 " Plug 'luochen1990/rainbow'
@@ -684,8 +684,8 @@ set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "set background=dark
 "let ayucolor="mirage"
-"let g:oceanic_next_terminal_bold = 1
-"let g:oceanic_next_terminal_italic = 1
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
 " Important!!
@@ -700,12 +700,12 @@ endif
 
 " colorscheme sonokai
 
-" colorscheme nordfox
+colorscheme nordfox
 """""""""""""""
 " colorscheme "
 """""""""""""""
-let g:rose_pine_variant='moon'
-colorscheme rose-pine
+" let g:rose_pine_variant='moon'
+" colorscheme rose-pine
 " colorschemea
 " colorscheme nord
 "color dracula
@@ -900,7 +900,7 @@ function! Show_documentation()
 		call CocAction('doHover')
 	endif
 endfunction
-nnoremap gh :call Show_documentation()<CR>
+nnoremap cs :call Show_documentation()<CR>
 
 " imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 " inoremap <silent><script><expr> <c-m> copilot#accept("\<cr>")
@@ -911,7 +911,7 @@ nnoremap gh :call Show_documentation()<CR>
 " let $NVIM_COC_LOG_LEVEL = 'debug'
 " let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
 
-nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<cr>
+nnoremap <silent><nowait> <c-e> :CocList diagnostics<cr>
 nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
 nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
 nnoremap <c-c> :CocCommand<CR>
@@ -1201,22 +1201,17 @@ let g:VM_maps["Redo"]               = '<C-r>'
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>f :F  **/*<left><left><left><left><left>
-let g:far#mapping = {
-			\ "replace_undo" : ["l"],
-			\ }
 
 set lazyredraw            " improve scrolling performance when navigating through large results
 set regexpengine=1        " use old regexp engine
-set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
 
 " shortcut for far.vim find
-nnoremap <silent> <Find-Shortcut>  :Farf<cr>
-vnoremap <silent> <Find-Shortcut>  :Farf<cr>
-
 " shortcut for far.vim replace
-nnoremap <silent> <Replace-Shortcut>  :Farr<cr>
-vnoremap <silent> <Replace-Shortcut>  :Farr<cr>
+
+noremap <LEADER>f :Far  **/*<left><left><left><left><left>
+let g:far#mapping = {
+			\ "replace_undo" : ["l"],
+			\ }
 
 " ===
 " === vim-calc

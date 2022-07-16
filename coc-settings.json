@@ -57,7 +57,7 @@
 	"diagnostic.refreshOnInsertMode": false,
 	"diagnostic.checkCurrentLine": true,
 	"diagnostic.virtualTextPrefix": " ❯❯❯ ",
-	"diagnostic.virtualText": false,
+	"diagnostic.virtualText": true,
 	"codeLens.enable": true,
 	"list.previewHighlightGroup": "Statement",
 	"list.nextKeymap": "<C-e>",
