@@ -408,7 +408,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
 
 " Pretty Dress
-Plug 'theniceboy/nvim-deus'
+" Plug 'theniceboy/nvim-deus'
 "Plug 'arzg/vim-colors-xcode'
 
 " Status line
@@ -464,6 +464,9 @@ Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
 Plug 'kdheepak/lazygit.nvim'
+" Plug
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
 
 " Tex
 Plug 'lervag/vimtex'
@@ -529,7 +532,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " If you have nodejs and yarn
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Other filetypes
 " Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 "
@@ -833,10 +836,18 @@ let g:gitgutter_sign_removed = '▏'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_modified_removed = '▒'
 " autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :gitGutterFold<CR>
+nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap <LEADER>gh :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+"Diff
+nnoremap <LEADER>gd :DiffviewOpen<CR> 
+"cloSe
+nnoremap <LEADER>gs :DiffviewClose<CR>
+"hisTory
+nnoremap <LEADER>gt :DiffviewFileHistory<CR>
+"togglefile
+nnoremap <LEADER>go :DiffviewToggleFiles<CR>
 "gitlens
 let g:blamer_enabled = 1
 "im-select
