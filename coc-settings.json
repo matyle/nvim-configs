@@ -80,14 +80,15 @@
 		"typescript",
 		"html",
 		"css",
-		"json",
 		"java",
 		"python",
 		"vue",
 		"svelte",
 		"c",
+		"cpp",
 		"cs",
-		"prisma"
+		"prisma",
+		"golang"
 	],
 	"coc.source.vimtex.enable": true,
 	"coc.source.vimtex.priority":100,
@@ -271,7 +272,7 @@
 						"filetypes": ["go"],
 						"disableWorkspaceFolders": true,
 						"initializationOptions": {
-							"usePlaceholders": true,
+							"usePlaceholders": true
 							// "gocodeCompletionEnabled": true,
 							//"diagnosticsEnabled": true
 							// "lintTool": "golint"

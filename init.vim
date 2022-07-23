@@ -42,8 +42,6 @@ source $XDG_CONFIG_HOME/nvim/_machine_specific.vim
 let &t_ut=''
 set autochdir
 
-
-
 " ===
 " === Editor behavior
 " ===
@@ -165,6 +163,8 @@ noremap <silent> <LEADER>o za
 
 " nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
+
+noremap <silent> <C-J> J
 noremap <silent> K 5k
 noremap <silent> J 5j
 
@@ -181,8 +181,8 @@ noremap B 5b
 "noremap e
 
 " Ctrl + K or J will move up/down the view port without moving the cursor
-noremap <C-K> 5<C-y>
-noremap <C-J> 5<C-e>
+" noremap <C-K> 5<C-y>
+" noremap <C-J> 5<C-e>
 
 
 
@@ -375,7 +375,6 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
-" For Vim-Plug
 Plug 'EdenEast/nightfox.nvim'
 
 Plug 'tpope/vim-fugitive'
@@ -501,6 +500,10 @@ Plug 'pantharshit00/vim-prisma'
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+"gotest
+Plug 'buoto/gotests-vim'" For Vim-Plug
+
+
 
 " Python
 Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
@@ -618,6 +621,9 @@ Plug 'sainnhe/sonokai'
 Plug 'rose-pine/neovim'
 " nerd font icons :D
 Plug 'shadmansaleh/lualine.nvim'
+
+
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 "
@@ -972,7 +978,7 @@ autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 " ===
 "filetype plugin on
 "Uncomment to override defaults:
-set shell=bash\ -i
+" set shell=bash\ -i
 
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
@@ -1191,6 +1197,7 @@ function g:Undotree_CustomMap()
 endfunc
 
 
+let g:gotests_bin = '/Users/matytan/go/bin/gotests'
 
 
 " ===
