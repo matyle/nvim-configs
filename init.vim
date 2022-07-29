@@ -625,6 +625,8 @@ Plug 'shadmansaleh/lualine.nvim'
 
 Plug 'wakatime/vim-wakatime'
 
+Plug 'askfiy/nvim-picgo'
+
 call plug#end()
 "
 """"""""""""""""""""""
@@ -709,14 +711,14 @@ endif
 
 " colorscheme sonokai
 
-colorscheme nordfox
+" colorscheme nordfox
 """""""""""""""
 " colorscheme "
 """""""""""""""
 " let g:rose_pine_variant='moon'
 " colorscheme rose-pine
 " colorschemea
-" colorscheme nord
+colorscheme nord
 "color dracula
 " color one
 "color deus
