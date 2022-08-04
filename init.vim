@@ -522,7 +522,7 @@ Plug 'dart-lang/dart-vim-plugin'
 "Plug 'arzg/vim-swift'
 
 " Markdown
-"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim'
@@ -537,7 +537,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " If you have nodejs and yarn
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Other filetypes
-" Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
+Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 "
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
