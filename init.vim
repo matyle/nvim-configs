@@ -499,7 +499,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'pantharshit00/vim-prisma'
 
 " Go
-Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+" Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 "gotest
 Plug 'buoto/gotests-vim'" For Vim-Plug
 
@@ -584,7 +584,7 @@ Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 " Plug 'skywind3000/asyncrun.vim'
 
 " Vim Applications
-" Plug 'itchyny/calendar.vim'
+Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 " Plug 'luochen1990/rainbow'
@@ -900,11 +900,17 @@ let g:coc_global_extensions = [
 			\ 'coc-yank',
 			\ 'https://github.com/rodrigore/coc-tailwind-intellisense']
 inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
 function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~# '\s'
@@ -912,15 +918,20 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <c-o> coc#refresh()
 
-function! Show_documentation()
-	call CocActionAsync('highlight')
-	if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	else
-		call CocAction('doHover')
-	endif
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('cs', 'in')
+  endif
 endfunction
-nnoremap cs :call Show_documentation()<CR>
+
+noremap <silent> <LEADER>w :call ShowDocumentation()<CR>
+
+
+"autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
 
 " imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 " inoremap <silent><script><expr> <c-m> copilot#accept("\<cr>")
@@ -930,8 +941,24 @@ nnoremap cs :call Show_documentation()<CR>
 " let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
 " let $NVIM_COC_LOG_LEVEL = 'debug'
 " let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-nnoremap <silent><nowait> <c-e> :CocList diagnostics<cr>
+" Formatting selected code.
+xmap <leader>t  <Plug>(coc-format-selected)
+
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+nnoremap <silent> <nowait> <c-e> :CocList diagnostics<cr>
 nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
 nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
 nnoremap <c-c> :CocCommand<CR>
@@ -1419,33 +1446,33 @@ augroup END
 " ===
 " === vim-go
 " ===
-let g:go_echo_go_info = 0
-let g:go_doc_popup_window = 1
-let g:go_def_mapping_enabled = 0
-let g:go_template_autocreate = 0
-let g:go_textobj_enabled = 0
-let g:go_auto_type_info = 1
-let g:go_def_mapping_enabled = 0
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_string_spellcheck = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_types = 1
-let g:go_highlight_variable_assignments = 0
-let g:go_highlight_variable_declarations = 0
-let g:go_doc_keywordprg_enabled = 0
+" let g:go_echo_go_info = 0
+" let g:go_doc_popup_window = 1
+" let g:go_def_mapping_enabled = 0
+" let g:go_template_autocreate = 0
+" let g:go_textobj_enabled = 0
+" let g:go_auto_type_info = 1
+" let g:go_def_mapping_enabled = 0
+" let g:go_highlight_array_whitespace_error = 1
+" let g:go_highlight_build_constraints = 1
+" let g:go_highlight_chan_whitespace_error = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_format_strings = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_function_parameters = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_generate_tags = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_space_tab_error = 1
+" let g:go_highlight_string_spellcheck = 1
+" let g:go_highlight_structs = 1
+" let g:go_highlight_trailing_whitespace_error = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_variable_assignments = 0
+" let g:go_highlight_variable_declarations = 0
+" let g:go_doc_keywordprg_enabled = 0
 
 "autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 "let g:go_def_mode='gopls'
