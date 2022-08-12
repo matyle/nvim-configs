@@ -911,6 +911,7 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <c-o> coc#refresh()
+
 function! Show_documentation()
 	call CocActionAsync('highlight')
 	if (index(['vim','help'], &filetype) >= 0)
@@ -1484,7 +1485,7 @@ let g:EasyMotion_smartcase = 1
 " ===
 " === goyo
 " ===
-map <LEADER>gy :Goyo 130<CR>
+" map <LEADER>gy :Goyo 130<CR>
 
 
 " ===

@@ -19,7 +19,7 @@
 	"suggest.floatEnable": true,
 	"suggest.detailField": "preview",
 	"suggest.snippetIndicator": "",
-	"suggest.triggerCompletionWait": 100,
+	"suggest.triggerCompletionWait": 50,
 	"suggest.echodocSupport": true,
 	"suggest.completionItemKindLabels": {
 		"class": "\uf0e8",
@@ -232,7 +232,7 @@
 		//"todolist.autoUpload": true,
 		//"todolist.promptForReminder": false,
 		//"coc-actions.hideCursor": false,
-		//"coc-actions.showActionKind": true,
+		// "coc-actions.showActionKind": true,
 		"diagnostic-languageserver.filetypes": {
 			"vim": "vint",
 			"email": "languagetool",
@@ -270,12 +270,11 @@
 						"command": "gopls",
 						"rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
 						"filetypes": ["go"],
-						"disableWorkspaceFolders": true,
 						"initializationOptions": {
-							"usePlaceholders": true
-							// "gocodeCompletionEnabled": true,
-							//"diagnosticsEnabled": true
-							// "lintTool": "golint"
+							"usePlaceholders": true,
+							 "gocodeCompletionEnabled": true,
+							"diagnosticsEnabled": true,
+							 "lintTool": "golint"
 						}
 					},
 					"bash": {
