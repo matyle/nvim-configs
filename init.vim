@@ -499,7 +499,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'pantharshit00/vim-prisma'
 
 " Go
-" Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 "gotest
 Plug 'buoto/gotests-vim'" For Vim-Plug
 
@@ -1472,7 +1472,7 @@ augroup END
 " let g:go_highlight_types = 1
 " let g:go_highlight_variable_assignments = 0
 " let g:go_highlight_variable_declarations = 0
-" let g:go_doc_keywordprg_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
 
 "autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 "let g:go_def_mode='gopls'

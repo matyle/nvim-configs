@@ -283,12 +283,6 @@
 						"rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
 						"filetypes": ["go"],
 						"initializationOptions": {
-							// "usePlaceholders": true,
-							//  "gocodeCompletionEnabled": true,
-							 // "lintTool": "golint"
-							 "usePlaceholders": true,
-							 "gocodeCompletionEnabled": true,
-							 "lintTool": "golint"
 						}
 					},
 					"bash": {
