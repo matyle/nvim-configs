@@ -45,11 +45,32 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
+" 因为失去焦点就会自动保存，所以没有必要使用 swapfile
+set noswapfile
+
 set exrc
 set secure
 set number
 set relativenumber
+" 高亮光标行
 set cursorline
+set termguicolors
+
+" 只有一个全局的 status line，而不是每一个 window 一个
+set laststatus=3
+
+" 当打开文件的时候，自动进入到上一次编辑的位置
+lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
+
+" 当文件被其他编辑器修改时，自动加载
+set autoread
+au FocusGained,BufEnter * :checktime
+" 当失去焦点或者离开当前的 buffer 的时候保存
+set autowrite
+autocmd FocusLost,BufLeave * silent! update
+
+
+
 set hidden
 set noexpandtab
 set tabstop=2
@@ -75,7 +96,6 @@ set splitbelow
 set noshowmode
 set wildignore+=*/node_modules/*,*/.git/*,.DS_Store,*/venv/*,*/__pycache__/*,*.pyc
 " 避免当行过长卡顿
-" set synmaxcol=500
 set showcmd
 set wildmenu
 set ignorecase
@@ -91,6 +111,7 @@ silent !mkdir -p $HOME/.config/nvim/tmp/undo
 "silent !mkdir -p $HOME/.config/nvim/tmp/sessions
 set backupdir=$HOME/.config/nvim/tmp/backup,.
 set directory=$HOME/.config/nvim/tmp/backup,.
+" 让退出 vim 之后 undo 消息不消失
 if has('persistent_undo')
 	set undofile
 	set undodir=$HOME/.config/nvim/tmp/undo,.
@@ -121,9 +142,10 @@ let mapleader=" "
 noremap ; :
 
 " Save & quit
-noremap Q :q<CR>
+noremap Q :x<CR>
 " noremap <C-q> :qa<CR>
 noremap S :w<CR>
+noremap <leader>q q
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
@@ -140,6 +162,7 @@ nnoremap ya y$
 
 " Copy to system clipboard
 noremap Y "+y
+nnoremap P "*p
 
 " Indentation
 nnoremap < <<
@@ -282,7 +305,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " === Other useful stuff
 " ===
 " Open a new instance of st with the cwd
-nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
+nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:x<CR>
 
 " Opening a terminal window
 " noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
@@ -638,8 +661,8 @@ set re=0
 " === auto save
 " ===
 " test
-let g:auto_save = 1  " enable AutoSave on Vim startup
-let g:auto_save_events =["FocusLost"]
+" let g:auto_save = 1  " enable AutoSave on Vim startup
+" let g:auto_save_events =["FocusLost"]
 "test
 " This will run :TagsGenerate after each save
 "let g:auto_save_postsave_hook = 'Autoformat'
@@ -872,20 +895,18 @@ let g:im_select_default = 'com.apple.keylayout.ABC'
 let g:coc_global_extensions = [
 			\ 'coc-css',
 			\ 'coc-diagnostic',
-			\ 'coc-docker',
 			\ 'coc-eslint',
 			\ 'coc-explorer',
 			\ 'coc-flutter-tools',
 			\ 'coc-gitignore',
+      \ 'coc-git',
 			\ 'coc-html',
 			\ 'coc-import-cost',
-			\ 'coc-java',
-			\ 'coc-jest',
 			\ 'coc-snippets',
+      \ 'coc-vimlsp',
 			\ 'coc-json',
 			\ 'coc-lists',
 			\ 'coc-prettier',
-			\ 'coc-prisma',
 			\ 'coc-pyright',
 			\ 'coc-sourcekit',
 			\ 'coc-stylelint',
@@ -894,7 +915,9 @@ let g:coc_global_extensions = [
 			\ 'coc-translator',
 			\ 'coc-tsserver',
 			\ 'coc-vetur',
+      \ 'coc-word',
 			\ 'coc-vimlsp',
+      \ 'coc-ci',
 			\ 'coc-markdownlint',
 			\ 'coc-yaml',
 			\ 'coc-yank',
@@ -909,6 +932,11 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" 方便在中文中使用 w 和 b 移动
+nmap <silent> w <Plug>(coc-ci-w)
+nmap <silent> b <Plug>(coc-ci-b)
+
 
 
 function! s:check_back_space() abort
@@ -929,17 +957,6 @@ endfunction
 noremap <silent> <LEADER>w :call ShowDocumentation()<CR>
 
 
-"autocmd CursorHold * if ! coc#util#has_float() | call CocActionAsync('doHover') | endif
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-
-" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-" inoremap <silent><script><expr> <c-m> copilot#accept("\<cr>")
-" let g:copilot_no_tab_map = v:true
-
-" set runtimepath^=~/.config/nvim/coc-extensions/coc-flutter-tools/
-" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
-" let $NVIM_COC_LOG_LEVEL = 'debug'
 " let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -973,8 +990,9 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent><nowait> gd <Plug>(coc-definition)
 nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
+nmap <silent> <nowait> gh : <C-u>Telescope coc declarations<cr>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gl <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
