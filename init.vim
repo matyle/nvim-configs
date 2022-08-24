@@ -56,11 +56,11 @@ set relativenumber
 set cursorline
 set termguicolors
 
-" 只有一个全局的 status line，而不是每一个 window 一个
-set laststatus=3
+" " 只有一个全局的 status line，而不是每一个 window 一个
+" set laststatus=3
 
-" 当打开文件的时候，自动进入到上一次编辑的位置
-lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
+" " 当打开文件的时候，自动进入到上一次编辑的位置
+" lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
 
 " 当文件被其他编辑器修改时，自动加载
 set autoread
@@ -399,9 +399,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
 Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 
 " ===基于 telescope
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'dhruvmanila/telescope-bookmarks.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+" Plug 'dhruvmanila/telescope-bookmarks.nvim'
 " use 'fannheyward/telescope-coc.nvim' -- 搜索 coc 提供的符号
 Plug 'fannheyward/telescope-coc.nvim'
 " use 'voldikss/vim-floaterm' -- 以悬浮窗口的形式打开终端
@@ -409,8 +409,8 @@ Plug 'voldikss/vim-floaterm'
 
 Plug 'idanarye/vim-merginal'
 
-" use 'tpope/vim-repeat' -- 更加强大的 `.`
-Plug 'tpope/vim-repeat'
+" " use 'tpope/vim-repeat' -- 更加强大的 `.`
+" Plug 'tpope/vim-repeat'
 " use 'windwp/nvim-autopairs' -- 自动括号匹配
 Plug 'windwp/nvim-autopairs'
 
@@ -422,7 +422,7 @@ Plug 'rmagatti/auto-session'
 
 " Plug 'vim-pandoc/vim-pandoc'
 
-Plug '907th/vim-auto-save'
+" Plug '907th/vim-auto-save'
 "安装插件
 " Plug 'ferrine/md-img-paste.vim'
 " ag ack
@@ -525,8 +525,8 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'pantharshit00/vim-prisma'
 
-" Go
-Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+" Go coc 代替
+" Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 "gotest
 Plug 'buoto/gotests-vim'" For Vim-Plug
 
@@ -629,7 +629,7 @@ call plug#end()
 
 
 " 加载 lua 配置
-lua require 'telescope-config'
+" lua require 'telescope-config'
 " lua require 'treesitter'
 
 
@@ -919,6 +919,8 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 " 方便在中文中使用 w 和 b 移动
 nmap <silent> w <Plug>(coc-ci-w)
 nmap <silent> b <Plug>(coc-ci-b)
+ 
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 
 
@@ -975,7 +977,7 @@ omap ac <Plug>(coc-classobj-a)
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent><nowait> gd <Plug>(coc-definition)
 nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
-nmap <silent> <nowait> gh : <C-u>Telescope coc declarations<cr>
+" nmap <silent> <nowait> gh : <C-u>Telescope coc declarations<cr>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gl <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
