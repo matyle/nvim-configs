@@ -390,19 +390,35 @@ func! CompileRunGcc()
 		:term go run .
 	endif
 endfunc
-
-
 " ===
 " === Install Plugins with Vim-Plug
 " ===
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
-Plug 'EdenEast/nightfox.nvim'
+Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 
-Plug 'tpope/vim-fugitive'
+" ===基于 telescope
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'dhruvmanila/telescope-bookmarks.nvim'
+" use 'fannheyward/telescope-coc.nvim' -- 搜索 coc 提供的符号
+Plug 'fannheyward/telescope-coc.nvim'
+" use 'voldikss/vim-floaterm' -- 以悬浮窗口的形式打开终端
+Plug 'voldikss/vim-floaterm'
 
 Plug 'idanarye/vim-merginal'
+
+" use 'tpope/vim-repeat' -- 更加强大的 `.`
+Plug 'tpope/vim-repeat'
+" use 'windwp/nvim-autopairs' -- 自动括号匹配
+Plug 'windwp/nvim-autopairs'
+
+
+" rmagatti/auto-session
+" use 'rmagatti/auto-session' -- 打开 vim 的时候，自动回复上一次打开的样子
+Plug 'rmagatti/auto-session'
+
 
 " Plug 'vim-pandoc/vim-pandoc'
 
@@ -415,10 +431,10 @@ Plug 'mileszs/ack.vim'
 Plug 'Chiel92/vim-autoformat'
 
 "git
-" Plug 'ludovicchabant/vim-gutentags'
-" Plug 'LoricAndre/fzterm.nvim'
-
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
+Plug 'rhysd/git-messenger.vim'
+Plug 'pwntester/octo.nvim'
+Plug 'tpope/vim-fugitive' "显示 git blame，实现一些基本操作的快捷执行
 
 " im-select
 if !has('gui_running')
@@ -428,10 +444,6 @@ endif
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
-
-" Pretty Dress
-" Plug 'theniceboy/nvim-deus'
-"Plug 'arzg/vim-colors-xcode'
 
 " Status line
 "Plug 'theniceboy/eleline.vim'
@@ -510,14 +522,6 @@ Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', '
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 "Plug 'jaxbot/browserlink.vim'
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'posva/vim-vue'
-" Plug 'evanleck/vim-svelte', {'branch': 'main'}
-" Plug 'leafOfTree/vim-svelte-plugin'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'MaxMEllon/vim-jsx-pretty'
-" Plug 'pangloss/vim-javascript'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'pantharshit00/vim-prisma'
 
@@ -555,10 +559,6 @@ Plug 'tpope/vim-markdown'
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
-" If you have nodejs and yarn
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Other filetypes
 Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 "
@@ -597,14 +597,6 @@ Plug 'junegunn/goyo.vim'
 " Find & Replace
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 
-" Documentation
-"Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
-
-" Mini Vim-APP
-"Plug 'jceb/vim-orgmode'
-"Plug 'mhinz/vim-startify'
-" Plug 'skywind3000/asynctasks.vim'
-" Plug 'skywind3000/asyncrun.vim'
 
 " Vim Applications
 Plug 'itchyny/calendar.vim'
@@ -618,26 +610,10 @@ Plug 'wincent/terminus'
 """"""""""""""""""""""
 "  lsp neovim  "
 """"""""""""""""""""""
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'glepnir/lspsaga.nvim'
-" Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
-"Plug 'makerj/vim-pdf'
-"Plug 'xolox/vim-session'
-"Plug 'xolox/vim-misc' " vim-session dep
-
-" Dependencies
-" Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'kana/vim-textobj-user'
-" Plug 'roxma/nvim-yarp'
 
 Plug 'akinsho/toggleterm.nvim'
 
-"joplin in vim
-" Plug 'tenfyzhong/joplin.vim'
-"
-"sonokai
-"𝐀𝐧𝐝𝐫𝐨𝐦𝐞𝐝𝐚
 "
 Plug 'sainnhe/sonokai'
 " theme
@@ -648,9 +624,16 @@ Plug 'shadmansaleh/lualine.nvim'
 
 Plug 'wakatime/vim-wakatime'
 
-Plug 'askfiy/nvim-picgo'
 
 call plug#end()
+
+
+" 加载 lua 配置
+lua require 'telescope-config'
+" lua require 'treesitter'
+
+
+
 "
 """"""""""""""""""""""
 "  END Install  "
