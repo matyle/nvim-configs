@@ -56,11 +56,11 @@ set relativenumber
 set cursorline
 set termguicolors
 
-" " 只有一个全局的 status line，而不是每一个 window 一个
-" set laststatus=3
+" 只有一个全局的 status line，而不是每一个 window 一个
+set laststatus=3
 
-" " 当打开文件的时候，自动进入到上一次编辑的位置
-" lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
+" 当打开文件的时候，自动进入到上一次编辑的位置
+lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
 
 " 当文件被其他编辑器修改时，自动加载
 set autoread
@@ -112,10 +112,8 @@ silent !mkdir -p $HOME/.config/nvim/tmp/undo
 set backupdir=$HOME/.config/nvim/tmp/backup,.
 set directory=$HOME/.config/nvim/tmp/backup,.
 " 让退出 vim 之后 undo 消息不消失
-if has('persistent_undo')
-	set undofile
-	set undodir=$HOME/.config/nvim/tmp/undo,.
-endif
+set undofile
+set undodir=$HOME/.config/nvim/tmp/undo,.
 set colorcolumn=100
 set updatetime=100
 set virtualedit=block
@@ -132,7 +130,12 @@ tnoremap <C-N> <C-\><C-N>
 tnoremap <C-O> <C-\><C-K><C-O>
 noremap <C-\> :ToggleTerm size=15<CR>
 nnoremap <F9> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
+noremap ,\ :FloatermToggle<CR>
 
+" ===
+" === gitmessage
+" ===
+noremap ,g :GitMessenger<CR>
 
 " ===
 " === Basic Mappings
@@ -410,7 +413,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'idanarye/vim-merginal'
 
 " " use 'tpope/vim-repeat' -- 更加强大的 `.`
-" Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 " use 'windwp/nvim-autopairs' -- 自动括号匹配
 Plug 'windwp/nvim-autopairs'
 
@@ -434,7 +437,7 @@ Plug 'Chiel92/vim-autoformat'
 " Plug 'majutsushi/tagbar'
 Plug 'rhysd/git-messenger.vim'
 Plug 'pwntester/octo.nvim'
-Plug 'tpope/vim-fugitive' "显示 git blame，实现一些基本操作的快捷执行
+" Plug 'tpope/vim-fugitive' "显示 git blame，实现一些基本操作的快捷执行
 
 " im-select
 if !has('gui_running')
@@ -492,11 +495,11 @@ Plug 'honza/vim-snippets'
 Plug 'mbbill/undotree'
 
 " Git
-Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
-Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
+" Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+" Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
+" Plug 'cohama/agit.vim'
 Plug 'kdheepak/lazygit.nvim'
 " Plug
 Plug 'nvim-lua/plenary.nvim'
@@ -939,12 +942,12 @@ function! ShowDocumentation()
   endif
 endfunction
 
-noremap <silent> <LEADER>w :call ShowDocumentation()<CR>
+noremap <silent> gj :call ShowDocumentation()<CR>
 
 
 " let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>t  <Plug>(coc-format-selected)
@@ -976,11 +979,11 @@ omap ac <Plug>(coc-classobj-a)
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent><nowait> gd <Plug>(coc-definition)
-nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
+nmap <silent><nowait> gD :tab sp<CR><Plug>(coc-definition)
 " nmap <silent> <nowait> gh : <C-u>Telescope coc declarations<cr>
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gl <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent><nowait> gy <Plug>(coc-type-definition)
+nmap <silent><nowait> gl <Plug>(coc-implementation)
+nmap <silent><nowait> gr <Plug>(coc-references)
 nmap <LEADER>rn <Plug>(coc-rename)
 nmap tt :CocCommand explorer<CR>
 " coc-translator
@@ -1484,26 +1487,6 @@ let g:go_doc_keywordprg_enabled = 0
 " autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
 " autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
-" ===
-" === OmniSharp
-" ===
-" let g:OmniSharp_typeLookupInPreview = 1
-" let g:omnicomplete_fetch_full_documentation = 1
-"
-" let g:OmniSharp_server_use_mono = 1
-" let g:OmniSharp_server_stdio = 1
-" let g:OmniSharp_highlight_types = 2
-" let g:OmniSharp_selector_ui = 'ctrlp'
-"
-" autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
-" autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
-" autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
-" autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
-" autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
-"
-" sign define OmniSharpCodeActions text=💡
-"
-" let g:coc_sources_disable_map = { 'cs': ['cs', 'cs-1', 'cs-2', 'cs-3'] }
 
 " ===
 " === vim-easymotion
@@ -1512,37 +1495,11 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
 
-" ===
-" === goyo
-" ===
-" map <LEADER>gy :Goyo 130<CR>
-
 
 " ===
 " === jsx
 " ===
 let g:vim_jsx_pretty_colorful_config = 1
-
-
-" ===
-" === fastfold
-" ===
-" nmap zuz <Plug>(FastFoldUpdate)
-" let g:fastfold_savehook = 1
-" let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-" let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-" let g:markdown_folding = 1
-" let g:tex_fold_enabled = 1
-" let g:vimsyn_folding = 'af'
-" let g:xml_syntax_folding = 1
-" let g:javaScript_fold = 1
-" let g:sh_fold_enabled= 7
-" let g:ruby_fold = 1
-" let g:perl_fold = 1
-" let g:perl_fold_blocks = 1
-" let g:r_syntax_folding = 1
-" let g:rust_fold = 1
-" let g:php_folding = 1
 
 
 " ===
@@ -1653,8 +1610,8 @@ let g:rnvimr_pick_enable = 1
 " let g:rnvimr_bw_enable = 1
 highlight link RnvimrNormal CursorLine
 " nnoremap <silent> <leader>rm :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-nnoremap <silent> <leader>rm :RnvimrToggle<CR>
-tnoremap <silent> <leader>rm <C-\><C-n>:RnvimrToggle<CR>
+nnoremap <silent> ,r :RnvimrToggle<CR>
+tnoremap <silent> ,r <C-\><C-n>:RnvimrToggle<CR>
 let g:rnvimr_action = {
 			\ '<C-t>': 'NvimEdit tabedit',
 			\ '<C-x>': 'NvimEdit split',
@@ -1713,7 +1670,7 @@ let g:rooter_silent_chdir = 1
 " ===
 " === AsyncRun
 " ===
-noremap gp :AsyncRun git push<CR>
+" noremap gp :AsyncRun git push<CR>
 
 
 
@@ -1761,12 +1718,12 @@ let g:move_key_modifier = 'C'
 " ===
 " === any-jump
 " ===
-nnoremap gj  :AnyJump<CR>
+nnoremap ,j  :AnyJump<CR>
 " Visual mode: jump to selected text in visual mode
-xnoremap gj :AnyJumpVisual<CR>
+xnoremap ,j :AnyJumpVisual<CR>
 
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ga :AnyJumpBack<CR>
+" " Normal mode: open previous opened file (after jump)
+" nnoremap <leader>ga :AnyJumpBack<CR>
 
 " Normal mode: open last closed search window again
 nnoremap <leader>gb :AnyJumpLastResults<CR>
@@ -1784,8 +1741,8 @@ let g:typescript_ignore_browserwords = 1
 " ===
 " === Agit
 " ===
-nnoremap <LEADER>gl :Agit<CR>
-let g:agit_no_default_mappings = 1
+" nnoremap <LEADER>gl :Agit<CR>
+" let g:agit_no_default_mappings = 1
 
 
 " ===
