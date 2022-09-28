@@ -400,7 +400,8 @@ endfunc
 call plug#begin('$HOME/.config/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
-
+"主题
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 " ===基于 telescope
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -627,6 +628,9 @@ Plug 'shadmansaleh/lualine.nvim'
 
 Plug 'wakatime/vim-wakatime'
 
+Plug 'projekt0n/github-nvim-theme'
+
+
 
 call plug#end()
 
@@ -634,6 +638,8 @@ call plug#end()
 " 加载 lua 配置
 " lua require 'telescope-config'
 " lua require 'treesitter'
+lua require 'plugins'
+lua require 'neogen'
 
 
 
@@ -727,7 +733,7 @@ endif
 " let g:rose_pine_variant='moon'
 " colorscheme rose-pine
 " colorschemea
-colorscheme nord
+" colorscheme nord
 "color dracula
 " color one
 "color deus
@@ -737,10 +743,33 @@ colorscheme nord
 "color xcodelighthc
 "set cursorcolumn
 " swap between light and dark themes for rose-pine (Toggle Theme)
-nnoremap <leader>ct <cmd>lua require('rose-pine.functions').toggle_variant({ 'moon', 'dawn' })<cr>
-hi NonText ctermfg=gray guifg=grey10
+" nnoremap <leader>ct <cmd>lua require('rose-pine.functions').toggle_variant({ 'moon', 'dawn' })<cr>
+" hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
+"
+" Example config in VimScript
+" NOTE: Configuration needs to be set BEFORE loading the color scheme with `colorscheme` command
+" let g:github_function_style = "italic"
+" let g:github_sidebars = ["qf", "vista_kind", "terminal", "packer"]
 
+" " Change the "hint" color to the "orange" color, and make the "error" color bright red
+" let g:github_colors = {
+"   \ 'hint': 'orange',
+"   \ 'error': '#ff0000'
+" \ }
+let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
+
+lua << EOF
+require("catppuccin").setup()
+EOF
+
+colorscheme catppuccin
+" Load the colorscheme
+" colorscheme github_dark
+" colorscheme github_dimmed
+" VimScript
+" colorscheme github_dark_colorblind
+" colorscheme github_dimmed
 " ===================== Start of Plugin Settings =====================
 
 
@@ -795,35 +824,6 @@ require('lualine').setup {
 	extensions = {}
 	}
 
---require('lualine').setup {
---  options = {
---    theme = bubbles_theme,
---    component_separators = '|',
---    section_separators = { left = '', right = '' },
---  },
---  sections = {
---    lualine_a = {
---      { 'mode', separator = { left = '' }, right_padding = 2 },
---    },
---    lualine_b = { 'filename', 'branch' },
---    lualine_c = { 'fileformat' },
---    lualine_x = {},
---    lualine_y = { 'filetype', 'progress' },
---    lualine_z = {
---      { 'location', separator = { right = '' }, left_padding = 2 },
---    },
---  },
---  inactive_sections = {
---    lualine_a = { 'filename' },
---    lualine_b = {},
---    lualine_c = {},
---    lualine_x = {},
---    lualine_y = {},
---    lualine_z = { 'location' },
---  },
---  tabline = {},
---  extensions = {},
---}
 END
 
 

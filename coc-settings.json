@@ -317,13 +317,41 @@
 				"index": {
 					"threads": 64
 				},
-				"client": {
-					"snippetSupport": true
-				},
-				"clang": {
-					"extraArgs": [
-						"-Wall"
-					]
+				"ccls": {
+					"command": "ccls",
+					"filetypes": [
+						"c",
+						"cpp",
+						"cuda",
+						"objc",
+						"objcpp"
+					],
+					"rootPatterns": [
+						"compile_commands.json",
+						".ccls",
+						".git/",
+						".vim",
+            ".hg/"
+					],
+					"initializationOptions": {
+						"cache": {
+							"directory": "/tmp/ccls"
+						},
+						"highlight": {
+							"lsRanges": true
+						},
+						"index": {
+							"threads": 64
+						},
+						"client": {
+							"snippetSupport": true
+						},
+						"clang": {
+							"extraArgs": [
+								"-Wall"
+							]
+						}
+					}
 				}
 			}
 		}
