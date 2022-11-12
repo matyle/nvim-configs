@@ -97,7 +97,7 @@
 		"latex":["tex","texmath"]
 	},
 	"coc.preferences.formatOnSaveFiletypes": [
-		"javascript",
+		// "javascript",
 		"typescript",
 		"html",
 		"css",
@@ -107,7 +107,7 @@
 		"svelte",
 		"c",
 		"cpp",
-		"cs",
+		// "cs",
 		"prisma",
 		"golang",
 		"go",

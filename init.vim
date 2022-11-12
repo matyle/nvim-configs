@@ -61,7 +61,7 @@ set laststatus=3
 
 " 当打开文件的时候，自动进入到上一次编辑的位置
 lua vim.api.nvim_create_autocmd( "BufReadPost", { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
-
+" let g:syntastic_go_checkers = ['gometalinter']
 " 当文件被其他编辑器修改时，自动加载
 set autoread
 au FocusGained,BufEnter * :checktime
@@ -402,12 +402,14 @@ call plug#begin('$HOME/.config/nvim/plugged')
 Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 "主题
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+" Plug 'dense-analysis/ale'
 " ===基于 telescope
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 " Plug 'dhruvmanila/telescope-bookmarks.nvim'
 " use 'fannheyward/telescope-coc.nvim' -- 搜索 coc 提供的符号
 Plug 'fannheyward/telescope-coc.nvim'
+" Plug 'nvim-cursorline'
 " use 'voldikss/vim-floaterm' -- 以悬浮窗口的形式打开终端
 Plug 'voldikss/vim-floaterm'
 
@@ -1776,6 +1778,9 @@ let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating window
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
+
+
+" let g:ale_linters = {'go': ['gometalinter']}
 
 
 
