@@ -110,7 +110,9 @@
 		"cs",
 		"prisma",
 		"golang",
-		"go"
+		"go",
+		"rust",
+		"rs",
 	],
 	"coc.source.vimtex.enable": true,
 	"coc.source.vimtex.priority":100,

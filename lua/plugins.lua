@@ -13,16 +13,16 @@ packer.init({
 })
 
 require("packer").startup({
-  function(use)
-		use {
-    "danymat/neogen",
-    config = function()
-        require('neogen').setup {}
-    end,
-    -- requires = "nvim-treesitter/nvim-treesitter",
-    -- Uncomment next line if you want to follow only stable versions
-    -- tag = "*"
-	}
+  -- function(use)
+		-- use {
+  --   "danymat/neogen",
+  --   config = function()
+  --       require('neogen').setup {}
+  --   end,
+  --   -- requires = "nvim-treesitter/nvim-treesitter",
+  --   -- Uncomment next line if you want to follow only stable versions
+  --   -- tag = "*"
+	-- }
     -- use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
     -- use({ "wbthomason/packer.nvim", opt = true })
     -- -- 基础
@@ -107,5 +107,5 @@ require("packer").startup({
     -- use 'anuvyklack/hydra.nvim' -- 消除重复快捷键，可以用于调整 window 大小等
     -- -- use 'inkarkat/vim-mark' --- 高亮多个搜索的内容 @todo 暂时安装不上
     -- use 'ojroques/vim-oscyank' -- 让 nvim 在远程 server 上拷贝到本地剪切板上
-  end,
+  -- end,
 })

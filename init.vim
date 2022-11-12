@@ -399,7 +399,7 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
-Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
+" Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 "主题
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 " ===基于 telescope
@@ -503,7 +503,7 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'cohama/agit.vim'
 Plug 'kdheepak/lazygit.nvim'
 " Plug
-Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
 
 " Tex
@@ -638,8 +638,8 @@ call plug#end()
 " 加载 lua 配置
 " lua require 'telescope-config'
 " lua require 'treesitter'
-lua require 'plugins'
-lua require 'neogen'
+" lua require 'plugins'
+" lua require 'neogen'
 
 
 
@@ -907,6 +907,7 @@ let g:coc_global_extensions = [
 			\ 'coc-markdownlint',
 			\ 'coc-yaml',
 			\ 'coc-yank',
+			\'coc-rust-analyzer',
 			\ 'https://github.com/rodrigore/coc-tailwind-intellisense']
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
