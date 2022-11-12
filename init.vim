@@ -399,7 +399,7 @@ endfunc
 
 call plug#begin('$HOME/.config/nvim/plugged')
 
-" Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
+Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 "主题
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 " ===基于 telescope
