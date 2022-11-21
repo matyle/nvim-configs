@@ -400,6 +400,7 @@ endfunc
 call plug#begin('$HOME/.config/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
+Plug 'sainnhe/everforest' "主题
 "主题
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 " Plug 'dense-analysis/ale'
@@ -459,7 +460,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " General Highlighter
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+" Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'RRethy/vim-illuminate'
 Plug 'junegunn/limelight.vim'
 
@@ -577,7 +578,7 @@ Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to c
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'godlygeek/tabular' " ga, or :Tabularize <regex> to align
-Plug 'easymotion/vim-Easymotion'
+" Plug 'easymotion/vim-Easymotion'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'Konfekt/FastFold'
 "
@@ -622,10 +623,10 @@ Plug 'akinsho/toggleterm.nvim'
 
 "
 Plug 'sainnhe/sonokai'
-" theme
-Plug 'rose-pine/neovim'
-" nerd font icons :D
-Plug 'shadmansaleh/lualine.nvim'
+
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
 
 
 Plug 'wakatime/vim-wakatime'
@@ -717,9 +718,9 @@ let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
 " Important!!
-if has('termguicolors')
-	set termguicolors
-endif
+" if has('termguicolors')
+" 	set termguicolors
+" endif
 "
 " The configuration options should be placed before `colorscheme sonokai`.
 " let g:sonokai_style = 'andromeda'
@@ -759,13 +760,32 @@ endif
 "   \ 'hint': 'orange',
 "   \ 'error': '#ff0000'
 " \ }
-let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
+" let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
 
-lua << EOF
-require("catppuccin").setup()
-EOF
+" lua << EOF
+" require("catppuccin").setup()
+" EOF
+"
+"
+" Important!!
+if has('termguicolors')
+   set termguicolors
+endif
+"For dark version.
+set background=dark
+" For light version.
+" set background=light
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'soft'
+" For better performance
+let g:everforest_better_performance = 1
+let g:everforest_transparent_background = 2
 
-colorscheme catppuccin
+colorscheme everforest
+
+" colorscheme catppuccin
 " Load the colorscheme
 " colorscheme github_dark
 " colorscheme github_dimmed
@@ -788,7 +808,7 @@ lua << END
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = auto,
+		theme = 'everforest',
 		component_separators = '|',
     section_separators = { left = '', right = '' },
 		disabled_filetypes = {},
@@ -1494,9 +1514,9 @@ let g:go_doc_keywordprg_enabled = 0
 " ===
 " === vim-easymotion
 " ===
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_do_shade = 0
-let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_do_mapping = 0
+" let g:EasyMotion_do_shade = 0
+" let g:EasyMotion_smartcase = 1
 
 
 " ===
