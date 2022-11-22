@@ -795,10 +795,6 @@ colorscheme everforest
 " ===================== Start of Plugin Settings =====================
 
 
-" ===
-" === eleline.vim
-" ===
-"let g:airline_powerline_fonts = 0
 
 " ===
 " lualine
@@ -1207,35 +1203,6 @@ let g:Lf_UseMemoryCache = 0
 let g:Lf_UseCache = 0
 
 
-" ===
-" === CTRLP (Dependency for omnisharp)
-" ===
-" let g:ctrlp_map = ''
-" let g:ctrlp_cmd = 'CtrlP'
-
-
-" ===
-" === vim-bookmarks
-" ===
-" let g:bookmark_no_default_key_mappings = 1
-" nmap mt <Plug>BookmarkToggle
-" nmap ma <Plug>BookmarkAnnotate
-" nmap ml <Plug>BookmarkShowAll
-" nmap mi <Plug>BookmarkNext
-" nmap mn <Plug>BookmarkPrev
-" nmap mC <Plug>BookmarkClear
-" nmap mX <Plug>BookmarkClearAll
-" nmap mu <Plug>BookmarkMoveUp
-" nmap me <Plug>BookmarkMoveDown
-" nmap <Leader>g <Plug>BookmarkMoveToLine
-" let g:bookmark_save_per_working_dir = 1
-" let g:bookmark_auto_save = 1
-" let g:bookmark_highlight_lines = 1
-" let g:bookmark_manage_per_buffer = 1
-" let g:bookmark_save_per_working_dir = 1
-" let g:bookmark_center = 1
-" let g:bookmark_auto_close = 1
-" let g:bookmark_location_list = 1
 
 
 " ===
@@ -1340,22 +1307,6 @@ let g:scrollstatus_size = 15
 
 
 " ===
-" === Ultisnips
-" ===
-" inoremap <c-n> <nop>
-" let g:UltiSnipsExpandTrigger="<c-j>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/snippets/']
-" silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
-" " Solve extreme insert-mode lag on macOS (by disabling autotrigger)
-" augroup ultisnips_no_auto_expansion
-"     au!
-"     au VimEnter * au! UltiSnips_AutoTrigger
-" augroup END
-
-
-" ===
 " === vimtex
 " ===
 
@@ -1399,37 +1350,6 @@ let g:vimtex_syntax_conceal_disable = 1
 "
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = 'zathura'
-" let g:vimtex_view_method = "skim"
-" let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-" let g:vimtex_view_general_options = '-r @line @pdf @tex'
-
-" augroup vimtex_mac
-"     autocmd!
-"     autocmd User VimtexEventCompileSuccess call UpdateSkim()
-" augroup END
-"
-" function! UpdateSkim() abort
-"     let l:out = b:vimtex.out()
-"     let l:src_file_path = expand('%:p')
-"     let l:cmd = [g:vimtex_view_general_viewer, '-r']
-"
-"     if !empty(system('pgrep Skim'))
-"     call extend(l:cmd, ['-g'])
-"     endif
-"
-"     call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
-" endfunction
-"
-" augroup vimtex_mac
-"   autocmd!
-"   autocmd FileType tex call SetServerName()
-" augroup END
-"
-" function! SetServerName()
-"   call system('echo ' . v:servername . ' > /tmp/curvimserver')
-" endfunction
-
-
 
 let g:vimtex_toc_config = {
 			\ 'name' : 'TOC',
@@ -1472,52 +1392,7 @@ augroup calendar-mappings
 augroup END
 
 
-" ===
-" === vim-go
-" ===
-" let g:go_echo_go_info = 0
-" let g:go_doc_popup_window = 1
-" let g:go_def_mapping_enabled = 0
-" let g:go_template_autocreate = 0
-" let g:go_textobj_enabled = 0
-" let g:go_auto_type_info = 1
-" let g:go_def_mapping_enabled = 0
-" let g:go_highlight_array_whitespace_error = 1
-" let g:go_highlight_build_constraints = 1
-" let g:go_highlight_chan_whitespace_error = 1
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_fields = 1
-" let g:go_highlight_format_strings = 1
-" let g:go_highlight_function_calls = 1
-" let g:go_highlight_function_parameters = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_generate_tags = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_space_tab_error = 1
-" let g:go_highlight_string_spellcheck = 1
-" let g:go_highlight_structs = 1
-" let g:go_highlight_trailing_whitespace_error = 1
-" let g:go_highlight_types = 1
-" let g:go_highlight_variable_assignments = 0
-" let g:go_highlight_variable_declarations = 0
 let g:go_doc_keywordprg_enabled = 0
-
-"autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-"let g:go_def_mode='gopls'
-"let g:go_info_mode='gopls'
-" autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
-" autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
-" autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
-
-
-" ===
-" === vim-easymotion
-" ===
-" let g:EasyMotion_do_mapping = 0
-" let g:EasyMotion_do_shade = 0
-" let g:EasyMotion_smartcase = 1
-
 
 " ===
 " === jsx
@@ -1555,29 +1430,6 @@ let g:xtabline_settings.last_open_first = 1
 noremap \p :echo expand('%:p')<CR>
 
 
-" ===
-" === vim-session
-" ===
-"let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
-"let g:session_autosave = 'no'
-"let g:session_autoload = 'no'
-"let g:session_command_aliases = 1
-"set sessionoptions-=buffers
-"set sessionoptions-=options
-"noremap sl :OpenSession<CR>
-"noremap sS :SaveSession<CR>
-"noremap ss :SaveSession
-"noremap sc :SaveSession<CR>:CloseSession<CR>:q<CR>
-"noremap so :OpenSession default<CR>
-"noremap sD :DeleteSession<CR>
-""noremap sA :AppendTabSession<CR>
-
-
-" ===
-" === context.vim
-"i ===
-"let g:context_add_mappings = 0
-"noremap <leader>ct :ContextToggle<CR>
 
 
 " ===
@@ -1776,7 +1628,7 @@ require'nvim-treesitter.configs'.setup {
 ensure_installed = {"typescript", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
 highlight = {
 enable = true,              -- false will disable the whole extension
-disable = { "c", "rust" },  -- list of language that will be disabled
+disable = {},  -- list of language that will be disabled
 },
 	 rainbow = {
 	 enable = true,
