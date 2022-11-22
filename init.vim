@@ -1248,11 +1248,18 @@ let g:VM_maps["Redo"]               = '<C-r>'
 
 set lazyredraw            " improve scrolling performance when navigating through large results
 set regexpengine=1        " use old regexp engine
+set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
 
 " shortcut for far.vim find
-" shortcut for far.vim replace
+nnoremap <silent> <LEADER>ff  :Farf<cr>
+vnoremap <silent> <LEADER>ff  :Farf<cr>
 
-noremap <LEADER>f :Far  **/*<left><left><left><left><left>
+" shortcut for far.vim replace
+nnoremap <silent> <LEADER>f  :Farr<cr>
+vnoremap <silent> <LEADER>f  :Farr<cr>
+
+" noremap <LEADER>f :Far  **/*<left><left><left><left><left>
+
 let g:far#mapping = {
 			\ "replace_undo" : ["l"],
 			\ }
