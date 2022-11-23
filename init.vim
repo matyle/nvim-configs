@@ -778,7 +778,7 @@ set background=dark
 " Set contrast.
 " This configuration option should be placed before `colorscheme everforest`.
 " Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'soft'
+let g:everforest_background = 'medium'
 " For better performance
 let g:everforest_better_performance = 1
 let g:everforest_transparent_background = 2
@@ -1020,11 +1020,11 @@ nmap <LEADER>aw  <Plug>(coc-codeaction-selected)w
 " coc-tasks
 " noremap <silent> <leader>ts :CocList tasks<CR>
 " coc-snippets
-imap <C-k> <Plug>(coc-snippets-expand)
 vmap <C-l> <Plug>(coc-snippets-select)
-let g:coc_snippet_next = '<c-j>'
+imap <C-k> <Plug>(coc-snippets-expand)
+let g:coc_snippet_next = '<c-k>'
 let g:coc_snippet_prev = '<c-n>'
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+imap <C-k> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'matytan'
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 " ===
@@ -1249,6 +1249,7 @@ let g:VM_maps["Redo"]               = '<C-r>'
 set lazyredraw            " improve scrolling performance when navigating through large results
 set regexpengine=1        " use old regexp engine
 set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
+let g:far#enable_undo=1
 
 " shortcut for far.vim find
 nnoremap <silent> <LEADER>ff  :Farf<cr>
@@ -1259,6 +1260,7 @@ nnoremap <silent> <LEADER>f  :Farr<cr>
 vnoremap <silent> <LEADER>f  :Farr<cr>
 
 " noremap <LEADER>f :Far  **/*<left><left><left><left><left>
+"
 
 let g:far#mapping = {
 			\ "replace_undo" : ["l"],
@@ -1548,11 +1550,6 @@ hi illuminatedWord cterm=undercurl gui=undercurl
 let g:rooter_patterns = ['__vim_project_root', '.git/']
 let g:rooter_silent_chdir = 1
 
-
-" ===
-" === AsyncRun
-" ===
-" noremap gp :AsyncRun git push<CR>
 
 
 
