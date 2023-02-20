@@ -778,7 +778,7 @@ set background=dark
 " Set contrast.
 " This configuration option should be placed before `colorscheme everforest`.
 " Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'medium'
+let g:everforest_background = 'soft'
 " For better performance
 let g:everforest_better_performance = 1
 let g:everforest_transparent_background = 2
@@ -961,7 +961,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-noremap <silent> gj :call ShowDocumentation()<CR>
+noremap <silent> <leader>w :call ShowDocumentation()<CR>
 
 
 " let $NVIM_COC_LOG_FILE = '/Users/david/Desktop/log.txt'
@@ -1068,7 +1068,8 @@ let g:mkdp_open_ip = ''
 
 " specify browser to open preview page
 " default: ''
-let g:mkdp_browser = ''
+" let g:mkdp_browser = ''
+let g:mkdp_browser = 'chromE'
 
 " set to 1, echo preview page url in command line when open preview page
 " default is 0
@@ -1380,8 +1381,8 @@ autocmd FileType tex noremap tv :VimtexView<CR>
 " ===
 noremap \c :Calendar -position=here<CR>
 noremap \\ :Calendar -view=clock -position=here<CR>
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
+" let g:calendar_google_calendar = 1
+" let g:calendar_google_task = 1
 augroup calendar-mappings
 	autocmd!
 	" diamond cursor
