@@ -403,6 +403,8 @@ Plug 'nvim-lua/plenary.nvim' "很多 lua 插件依赖的库
 Plug 'sainnhe/everforest' "主题
 "主题
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+" Plug 'ghifarit53/tokyonight-vim'
 " Plug 'dense-analysis/ale'
 " ===基于 telescope
 " Plug 'nvim-telescope/telescope.nvim'
@@ -420,6 +422,8 @@ Plug 'idanarye/vim-merginal'
 Plug 'tpope/vim-repeat'
 " use 'windwp/nvim-autopairs' -- 自动括号匹配
 Plug 'windwp/nvim-autopairs'
+
+Plug 'tomtom/tcomment_vim'
 
 
 " rmagatti/auto-session
@@ -455,7 +459,7 @@ Plug 'nvim-treesitter/playground'
 " Status line
 "Plug 'theniceboy/eleline.vim'
 Plug 'ojroques/vim-scrollstatus'
-Plug 'nvim-lualine/lualine.nvim'
+" Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -572,7 +576,7 @@ Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
 Plug 'theniceboy/antovim' " gs to switch
 Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
@@ -594,7 +598,7 @@ Plug 'theniceboy/vim-move'
 Plug 'Yggdroot/indentLine'
 
 " For general writing
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
@@ -610,7 +614,7 @@ Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 " Plug 'luochen1990/rainbow'
-Plug 'mg979/vim-xtabline'
+" Plug 'mg979/vim-xtabline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
 
@@ -709,7 +713,7 @@ nnoremap <Leader>a :Ack!<Space>
 " ===
 " === Dress up my vim
 " ===
-set termguicolors " enable true colors support
+" set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "set background=dark
 "let ayucolor="mirage"
@@ -718,9 +722,9 @@ let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
 " Important!!
-" if has('termguicolors')
-" 	set termguicolors
-" endif
+if has('termguicolors')
+	set termguicolors
+endif
 "
 " The configuration options should be placed before `colorscheme sonokai`.
 " let g:sonokai_style = 'andromeda'
@@ -768,24 +772,25 @@ let g:oceanic_next_terminal_italic = 1
 "
 "
 " Important!!
-if has('termguicolors')
-   set termguicolors
-endif
-"For dark version.
-set background=dark
-" For light version.
-" set background=light
-" Set contrast.
-" This configuration option should be placed before `colorscheme everforest`.
-" Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'soft'
-" For better performance
-let g:everforest_better_performance = 1
-let g:everforest_transparent_background = 2
+" if has('termguicolors')
+"    set termguicolors
+" endif
+" "For dark version.
+" set background=dark
+" " For light version.
+" " set background=light
+" " Set contrast.
+" " This configuration option should be placed before `colorscheme everforest`.
+" " Available values: 'hard', 'medium'(default), 'soft'
+" let g:everforest_background = 'soft'
+" " For better performance
+" let g:everforest_better_performance = 1
+" let g:everforest_transparent_background = 0
 
-colorscheme everforest
+" colorscheme everforest
 
-" colorscheme catppuccin
+
+colorscheme catppuccin
 " Load the colorscheme
 " colorscheme github_dark
 " colorscheme github_dimmed
@@ -794,8 +799,14 @@ colorscheme everforest
 " colorscheme github_dimmed
 " ===================== Start of Plugin Settings =====================
 
+" Vim Script
+" colorscheme tokyonight
 
-
+" There are also colorschemes for the different styles
+" colorscheme tokyonight-night
+" colorscheme tokyonight-storm
+" colorscheme tokyonight-day
+" colorscheme tokyonight-moon
 " ===
 " lualine
 " ===
@@ -804,7 +815,7 @@ lua << END
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = 'everforest',
+		theme = auto,
 		component_separators = '|',
     section_separators = { left = '', right = '' },
 		disabled_filetypes = {},
@@ -832,12 +843,10 @@ require('lualine').setup {
 		lualine_z = {}
 		},
 	tabline = {
-		lualine_a = {'buffers'},
-		lualine_b = {'branch'},
-		lualine_c = {'filename'},
+		lualine_a = {'filename'},
 		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {'tabs'}
+		lualine_y = {'tabs'},
+		lualine_z = {}
 		},
 	extensions = {}
 	}
@@ -1579,10 +1588,11 @@ vnoremap <leader>d "_d
 " " =
 " nnoremap ci cl
 " let g:tcomment_textobject_inlinecomment = ''
-" nmap <LEADER>cn g>c
-" vmap <LEADER>cn g>
-" nmap <LEADER>cu g<c
-" vmap <LEADER>cu g<
+nmap <LEADER>cn g>c
+vmap <LEADER>cn g>
+" vmap gcc g>
+nmap <LEADER>cu g<c
+vmap <LEADER>cu g<
 " use the commentary plug
 " gcc normal mode can comment and uncomment
 " gc  visual mode
@@ -1630,7 +1640,7 @@ let g:typescript_ignore_browserwords = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-ensure_installed = {"typescript", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
+ensure_installed = {"typescript","go","rust", "dart", "java","c","cpp","bash"},     -- one of "all", "language", or a list of languages
 highlight = {
 enable = true,              -- false will disable the whole extension
 disable = {},  -- list of language that will be disabled
