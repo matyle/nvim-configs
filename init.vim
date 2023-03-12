@@ -606,7 +606,7 @@ Plug 'Yggdroot/indentLine'
 " Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
-Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
+Plug 'brooth/far.vim'
 
 
 " Vim Applications
